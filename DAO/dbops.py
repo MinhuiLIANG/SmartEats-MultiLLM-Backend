@@ -15,7 +15,7 @@ firebase_admin.initialize_app(cred, {
 
 # get it from frontend
 # uid = 'asdkhasd'
-version = 'non_customizable'
+version = 'SmartEats'
 
 
 def adduser(uid):
@@ -90,7 +90,12 @@ def adduser(uid):
 
     surveytime = ''
 
-    uxinit = {"accuracya":acca,"explanationa":expa,"explanationb":expb,"explanationc":expc,"interactiona":intera,"usefula":usefa,"usefulb":usefb,"trusta":trusta,"trustb":trustb,'eata':eata,'useintenta':useia,'useintentb':useib,'useintentc':useic,'quality':quaa,'additionala':ada,'additionalb':adb,'customizea':cusa,'customizeb':cusb,'customizec':cusc,'education':edul,'work':workf,'race':race,'humanpersonality':hper,'feedback':feedback,"extra":extra,"surveytime":surveytime}
+    uxinit = {"accuracya": acca, "explanationa": expa, "explanationb": expb, "explanationc": expc,
+              "interactiona": intera, "usefula": usefa, "usefulb": usefb, "trusta": trusta, "trustb": trustb,
+              'eata': eata, 'useintenta': useia, 'useintentb': useib, 'useintentc': useic, 'quality': quaa,
+              'additionala': ada, 'additionalb': adb, 'customizea': cusa, 'customizeb': cusb, 'customizec': cusc,
+              'education': edul, 'work': workf, 'race': race, 'humanpersonality': hper, 'feedback': feedback,
+              "extra": extra, "surveytime": surveytime}
 
     proid = 'none'
 
@@ -176,7 +181,11 @@ def addbaseline(uid):
 
     surveytime = ''
 
-    uxinit = {"accuracya":acca,"explanationa":expa,"explanationb":expb,"explanationc":expc,"interactiona":intera,"usefula":usefa,"usefulb":usefb,"trusta":trusta,"trustb":trustb,'eata':eata,'useintenta':useia,'useintentb':useib,'useintentc':useic,'quality':quaa,'additionala':ada,'additionalb':adb,'chatbotstyle':botstyle,'education':edul,'work':workf,'race':race,'humanpersonality':hper,'feedback':feedback,"extra":extra,"surveytime":surveytime}
+    uxinit = {"accuracya": acca, "explanationa": expa, "explanationb": expb, "explanationc": expc,
+              "interactiona": intera, "usefula": usefa, "usefulb": usefb, "trusta": trusta, "trustb": trustb,
+              'eata': eata, 'useintenta': useia, 'useintentb': useib, 'useintentc': useic, 'quality': quaa,
+              'additionala': ada, 'additionalb': adb, 'chatbotstyle': botstyle, 'education': edul, 'work': workf,
+              'race': race, 'humanpersonality': hper, 'feedback': feedback, "extra": extra, "surveytime": surveytime}
 
     proid = 'none'
 
@@ -187,6 +196,113 @@ def addbaseline(uid):
             'userexperience': uxinit,
             'AprolificID': proid
         })
+
+
+def addSmartEats(uid):
+    fixper = 'introverted'
+    fixstyle = 'formally'
+
+    # default settings
+    name = "S.B."
+    email = "xxx@xxx.com"
+    gender = "male"
+    age = 30
+    height = 180
+    weight = 75
+    location = "Hong Kong"
+    persona = fixper
+    style = fixstyle
+    character = "none"
+    contraindication = "none"
+    healthconcern = "none"
+    # default settings
+    emotion = 'neutral_'
+    habit = 'regular_'
+    limitation = 'neutral_'
+    goal = 'keep healthy_'
+    preference = 'delicous healthy food'
+    env = 'home_'
+    his = 'delicious local foods_'
+    accfrst = "none"
+    accscnd = "none"
+    accfood = "none"
+
+    userinit = {"S_name": name, "S_email": email, "S_gender": gender, "S_age": age, "S_height": height,
+                "S_weight": weight, "S_location": location, "S_character": character, "S_persona": persona,
+                "S_style": style, "S_health": healthconcern, "S_history": his, "D_contraindication": contraindication,
+                "D_emotion": emotion, "D_eating habit": habit, "D_time limitation": limitation, "D_goal": goal,
+                "D_env": env, "D_preference": preference, "D_firstaccept": accfrst, "D_secondaccept": accscnd,
+                "D_accfood": accfood}
+
+    chitchatround = 0
+    chathistory = ''
+    currenttopic = 'icebreak'
+    preferencefood = 'none'
+    image = ''
+    allfoods = ''
+    lasttask = ''
+    infoctime = [0]
+    rectime = [0]
+
+    tasks = {"emotion": 0, "hunger level": 0, "time limitation": 0, "goal": 0, "env": 0, "his": 0}
+    LTMslots = ''
+
+    convinit = {"D_history": chathistory, "D_currenttopic": currenttopic, "D_chitchatround": chitchatround,
+                "image": image, "preferencefood": preferencefood, "allfoods": allfoods, "D_tasks": tasks,
+                "LTMslots": LTMslots, "lasttask": lasttask, "infoctime": infoctime, "rectime": rectime}
+
+    acca = 'none'
+    expa = 'none'
+    expb = 'none'
+    expc = 'none'
+    intera = 'none'
+    usefa = 'none'
+    usefb = 'none'
+    trusta = 'none'
+    trustb = 'none'
+    eata = 'none'
+    useia = 'none'
+    useib = 'none'
+    useic = 'none'
+    quaa = 'none'
+    ada = 'none'
+    adb = 'none'
+    botstyle = 'none'
+    edul = 'none'
+    workf = 'none'
+    race = 'none'
+    hper = 'none'
+    feedback = 'none'
+    extra = 'none'
+
+    surveytime = ''
+
+    uxinit = {"accuracya": acca, "explanationa": expa, "explanationb": expb, "explanationc": expc,
+              "interactiona": intera, "usefula": usefa, "usefulb": usefb, "trusta": trusta, "trustb": trustb,
+              'eata': eata, 'useintenta': useia, 'useintentb': useib, 'useintentc': useic, 'quality': quaa,
+              'additionala': ada, 'additionalb': adb, 'chatbotstyle': botstyle, 'education': edul, 'work': workf,
+              'race': race, 'humanpersonality': hper, 'feedback': feedback, "extra": extra, "surveytime": surveytime}
+
+    proid = 'none'
+
+    db.reference("/" + version + '/' + uid).update(
+        {
+            'userprofile': userinit,
+            'conversation': convinit,
+            'userexperience': uxinit,
+            'AprolificID': proid
+        })
+
+
+def updateLTM(uid, info):
+    LTMinfo = db.reference('/' + version + '/' + uid + "/conversation/LTMslots").get()
+    newLTM = LTMinfo + ' and, ' + info
+    db.reference('/' + version + '/' + uid + "/userprofile/LTMslots").set(newLTM)
+
+
+def getLTM(uid):
+    LTMinfo = db.reference('/' + version + '/' + uid + "/conversation/LTMslots").get()
+    return LTMinfo
 
 
 def upload_image_to_firebase(user_id, image_name, image_url):
@@ -320,6 +436,18 @@ def getpreferencefood(uid):
     return food
 
 
+def gettasklst(uid):
+    tasks = db.reference('/' + version + '/' + uid + "/conversation/D_tasks").get()
+    taskAvailable = []
+    for key in tasks:
+        if tasks[key] == 0:
+            taskAvailable.append(key)
+    if len(taskAvailable) != 0:
+        return taskAvailable
+    else:
+        return 'finished'
+
+
 def gettask(uid):
     tasks = db.reference('/' + version + '/' + uid + "/conversation/D_tasks").get()
     taskAvailable = []
@@ -332,6 +460,11 @@ def gettask(uid):
         return taskAvailable[0]
     if len(taskAvailable) == 0:
         return 'finished'
+
+
+def getlasttask(uid):
+    task = db.reference('/' + version + '/' + uid + "/conversation/lasttask").get()
+    return task
 
 
 def getwholeconversation(uid):
@@ -377,6 +510,18 @@ def getextra(uid):
 def getbotstyle(uid):
     style = db.reference('/' + version + '/' + uid + "/userexperience/chatbotstyle").get()
     return style
+
+
+def getinfoctime(uid):
+    time = db.reference('/' + version + '/' + uid + "/conversation/infoctime").get()
+    avtime = sum(time) / (len(time) - 1)
+    return time, avtime
+
+
+def getrectime(uid):
+    time = db.reference('/' + version + '/' + uid + "/conversation/rectime").get()
+    avtime = sum(time) / (len(time) - 1)
+    return time, avtime
 
 
 def upemail(uid, email):
@@ -480,6 +625,10 @@ def uppreferencefood(uid, food):
 
 def uptask(uid, task):
     db.reference('/' + version + '/' + uid + "/conversation/D_tasks/" + task).set(1)
+
+
+def upcurtask(uid, task):
+    db.reference('/' + version + '/' + uid + "/conversation/lasttask").set(task)
 
 
 def upconversation(uid, botsent, usersent):
@@ -586,15 +735,15 @@ def upadb(uid, adb):
 
 
 def upcusa(uid, cusa):
-    db.reference('/' + version + '/' + uid +"/userexperience/customizea").set(cusa)
+    db.reference('/' + version + '/' + uid + "/userexperience/customizea").set(cusa)
 
 
 def upcusb(uid, cusb):
-    db.reference('/' + version + '/' + uid +"/userexperience/customizeb").set(cusb)
+    db.reference('/' + version + '/' + uid + "/userexperience/customizeb").set(cusb)
 
 
 def upcusc(uid, cusc):
-    db.reference('/' + version + '/' + uid +"/userexperience/customizec").set(cusc)
+    db.reference('/' + version + '/' + uid + "/userexperience/customizec").set(cusc)
 
 
 def upedu(uid, edu):
@@ -631,6 +780,18 @@ def upsurveytime(uid, surveytime):
 
 def upproid(uid, proid):
     db.reference('/' + version + '/' + uid + "/AprolificID").set(proid)
+
+
+def upinfoctime(uid, time):
+    timelst = db.reference('/' + version + '/' + uid + "/conversation/infoctime").get()
+    timelst.append(time)
+    db.reference('/' + version + '/' + uid + "/conversation/infoctime").set(timelst)
+
+
+def uprectime(uid, time):
+    timelst = db.reference('/' + version + '/' + uid + "/conversation/rectime").get()
+    timelst.append(time)
+    db.reference('/' + version + '/' + uid + "/conversation/rectime").set(timelst)
 
 # lst = pulluid()
 # print(lst)
