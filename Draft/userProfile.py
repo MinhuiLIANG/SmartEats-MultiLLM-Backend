@@ -1,0 +1,2 @@
+# need to be stored in database
+userprofile = {"name":"Minhui","email":"mhliang@cityu.com","gender":"male","age":22,"height":181,"weight":74,"location":"Hong Kong","persona":"outgoing and humorous, likes to make jokes","style":"very humorous","identity":"friend","contraindication":"fish","emotion":"neutral","hunger level":"neutral","time limitation":"neutral","goal":"lose weight and balanced eating","preference":"I would like to try something spicy and beef"}
