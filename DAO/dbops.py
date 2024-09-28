@@ -267,7 +267,7 @@ def addSmartEats(uid):
     quaa = 'none'
     ada = 'none'
     adb = 'none'
-    botstyle = 'none'
+    timeexp = 'none'
     edul = 'none'
     workf = 'none'
     race = 'none'
@@ -280,7 +280,7 @@ def addSmartEats(uid):
     uxinit = {"accuracya": acca, "explanationa": expa, "explanationb": expb, "explanationc": expc,
               "interactiona": intera, "usefula": usefa, "usefulb": usefb, "trusta": trusta, "trustb": trustb,
               'eata': eata, 'useintenta': useia, 'useintentb': useib, 'useintentc': useic, 'quality': quaa,
-              'additionala': ada, 'additionalb': adb, 'chatbotstyle': botstyle, 'education': edul, 'work': workf,
+              'additionala': ada, 'additionalb': adb, 'timeexp': timeexp, 'education': edul, 'work': workf,
               'race': race, 'humanpersonality': hper, 'feedback': feedback, "extra": extra, "surveytime": surveytime}
 
     proid = 'none'
@@ -511,6 +511,10 @@ def getbotstyle(uid):
     style = db.reference('/' + version + '/' + uid + "/userexperience/chatbotstyle").get()
     return style
 
+
+def gettimeexp(uid):
+    timeexp = db.reference('/' + version + '/' + uid + "/userexperience/timeexp").get()
+    return timeexp
 
 def getinfoctime(uid):
     time = db.reference('/' + version + '/' + uid + "/conversation/infoctime").get()
@@ -772,6 +776,10 @@ def upextra(uid, extra):
 
 def upbotstyle(uid, style):
     db.reference('/' + version + '/' + uid + "/userexperience/chatbotstyle").set(style)
+
+
+def uptimeexp(uid, timeexp):
+    db.reference('/' + version + '/' + uid + "/userexperience/timeexp").set(timeexp)
 
 
 def upsurveytime(uid, surveytime):

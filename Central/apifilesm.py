@@ -11,7 +11,7 @@ from ibfir import IBInterface
 from senti import SentimentInterface
 from smhometran import homeapi
 from bottran import botapi
-from endtranbl import endblapi
+from endtransm import endsmapi
 from proidtran import proidapi
 from custran import cusapi
 
@@ -25,7 +25,7 @@ app.add_url_rule('/back', view_func=cen_api, methods=['POST', 'GET'])
 app.add_url_rule('/icebreak', view_func=IBInterface, methods=['POST', 'GET'])
 app.add_url_rule('/bot', view_func=botapi, methods=['POST', 'GET'])
 app.add_url_rule('/senti', view_func=SentimentInterface, methods=['POST', 'GET'])
-app.add_url_rule('/end', view_func=endblapi, methods=['POST', 'GET'])
+app.add_url_rule('/end', view_func=endsmapi, methods=['POST', 'GET'])
 app.add_url_rule('/proid', view_func=proidapi, methods=['POST', 'GET'])
 
 http_server = WSGIServer(('0.0.0.0', 8080), app, log=None)
