@@ -42,11 +42,22 @@ def cen_api():
         action = '<down>'
         print('{tp} & {ac}'.format(tp=topic,ac=action))
     elif topic == 'chitchat' and cc_cnt < 6:
-        action = '<keep>'
+        action = upgradeConInterface.controlInterface(uid=uid)
+        if action != '<keep>':
+            action = '<keep>'
         print('{tp} & {ac}'.format(tp=topic,ac=action))
-    else:
+    elif topic == 'chitchat':
         action = upgradeConInterface.controlInterface(uid=uid)
         print('{tp} & {ac}'.format(tp=topic,ac=action))
+    elif topic == 'icebreak':
+        action = upgradeConInterface.controlInterface(uid=uid)
+        if action != '<down>':
+            action = '<down>'
+        print('{tp} & {ac}'.format(tp=topic,ac=action))
+    else:
+        action = '<down>'
+        print('{tp} & {ac}'.format(tp=topic,ac=action))
+
     nxttopic = topicTree.movepter(topic, action)
 
     dbops.uptopic(uid, nxttopic)

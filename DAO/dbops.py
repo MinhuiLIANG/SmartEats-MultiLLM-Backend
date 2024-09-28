@@ -240,6 +240,7 @@ def addSmartEats(uid):
     preferencefood = 'none'
     image = ''
     allfoods = ''
+    currenttask = ''
     lasttask = ''
     infoctime = [0]
     rectime = [0]
@@ -249,7 +250,7 @@ def addSmartEats(uid):
 
     convinit = {"D_history": chathistory, "D_currenttopic": currenttopic, "D_chitchatround": chitchatround,
                 "image": image, "preferencefood": preferencefood, "allfoods": allfoods, "D_tasks": tasks,
-                "LTMslots": LTMslots, "lasttask": lasttask, "infoctime": infoctime, "rectime": rectime}
+                "LTMslots": LTMslots, "lasttask": lasttask, "currenttask": currenttask, "infoctime": infoctime, "rectime": rectime}
 
     acca = 'none'
     expa = 'none'
@@ -271,7 +272,6 @@ def addSmartEats(uid):
     edul = 'none'
     workf = 'none'
     race = 'none'
-    hper = 'none'
     feedback = 'none'
     extra = 'none'
 
@@ -281,7 +281,7 @@ def addSmartEats(uid):
               "interactiona": intera, "usefula": usefa, "usefulb": usefb, "trusta": trusta, "trustb": trustb,
               'eata': eata, 'useintenta': useia, 'useintentb': useib, 'useintentc': useic, 'quality': quaa,
               'additionala': ada, 'additionalb': adb, 'timeexp': timeexp, 'education': edul, 'work': workf,
-              'race': race, 'humanpersonality': hper, 'feedback': feedback, "extra": extra, "surveytime": surveytime}
+              'race': race, 'feedback': feedback, "extra": extra, "surveytime": surveytime}
 
     proid = 'none'
 
@@ -462,6 +462,11 @@ def gettask(uid):
         return 'finished'
 
 
+def getcurrenttask(uid):
+    task = db.reference('/' + version + '/' + uid + "/conversation/currenttask").get()
+    return task
+
+
 def getlasttask(uid):
     task = db.reference('/' + version + '/' + uid + "/conversation/lasttask").get()
     return task
@@ -633,6 +638,10 @@ def uptask(uid, task):
 
 def upcurtask(uid, task):
     db.reference('/' + version + '/' + uid + "/conversation/lasttask").set(task)
+
+
+def upcurrenttask(uid, task):
+    db.reference('/' + version + '/' + uid + "/conversation/currenttask").set(task)
 
 
 def upconversation(uid, botsent, usersent):

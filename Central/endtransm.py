@@ -33,7 +33,6 @@ def endsmapi():
     edul = user_request.get("edul")
     workf = user_request.get("workf")
     race = user_request.get("race")
-    hper = user_request.get("hper")
     feedback = user_request.get("feedback")
     extra = user_request.get("extra")
 
@@ -60,7 +59,6 @@ def endsmapi():
     dbops.upedu(uid, edul)
     dbops.upwork(uid, workf)
     dbops.uprace(uid, race)
-    dbops.uphper(uid, hper)
     dbops.upfeedback(uid, feedback)
     dbops.upextra(uid, extra)
     dbops.uptimeexp(uid, time)
