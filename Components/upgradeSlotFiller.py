@@ -22,11 +22,11 @@ def slot_interface(uid):
     topic 1: <emotion> -> values 1: [<positive>, <neutral>, <negative>]
     topic 2: <eating habit> -> values 2: [<regular>, <casual>]
     topic 3: <time limitation> -> value 3: [<limited>, <neutral>, <sufficient>]
-    topic 4: <goal> -> value 4: [User's sentence]
-    topic 5: <environment> -> value 5: [<outside>, <home>]
+    topic 4: <goal> -> value 4: [User's goal in the response]
+    topic 5: <dining place> -> value 5: [<outside>, <home>]
     topic 6: <eating history> -> value 6: [Food type in User's sentence]
 
-    The above pairs show the map of topics and values, each topic (such as <emotion>) relates to several values (such as <positive>, <neutral>, <negative>).
+    The above pairs show the map of topics and values, each topic (such as <dining place>, which asks User eat at outside or home) relates to several values (such as <outside>, <home>).
     There will be a single round conversation, in which the assistant asks a question related to one of the topics shown above.
     Then the User will respond. Please output the one value in values related to the topic the assistant asks according to the content of the User's response.
 
@@ -41,9 +41,9 @@ def slot_interface(uid):
     in the second example, 'Let's talk about your eating goals or any health plans you may have.' means that the assistant is asking about User's goal, so the topic is <goal>.
     
     Second, you need to judge what value is related to the topic you just find according to the User's words. If the value is abstract, like [Food type in User's sentence], you should extract the food information in the user's sentence as the value. In the first example, 'limited time for the meal' means the <time limitation> is <limited>;
-    in the second example, the value of <goal> is the user's sentence, so the value is <I think I want to lose weight.>, just set the value to the user's original sentence.
+    in the second example, the value of <goal> is the user's goal in the response, so the value is <I want to lose weight.>, just extract the goal in the user's response.
     
-    So your output of the first example is: <time limitation>:<limited>; for the second example, it is <goal>:<I think I want to lose weight.>
+    So your output of the first example is: <time limitation>:<limited>; for the second example, it is <goal>:<I want to lose weight.>
     Now try this conversation:\n
     '''
   
@@ -70,7 +70,7 @@ def profile_editor(uid):
   res = slot_interface(uid)
   print("********", res)
   lst = res.split(':')
-  topic_list = ['emotion', 'eating habit', 'time limitation', 'goal', 'environment', 'eating history']
+  topic_list = ['emotion', 'eating habit', 'time limitation', 'goal', 'dining place', 'eating history']
   value_list = ['positive', 'neutral', 'negative', 'limited', 'sufficient', 'regular', 'casual', 'outside', 'home']
   if len(lst)>1:
     topic = lst[0].replace('<','').replace('>','')
@@ -82,7 +82,7 @@ def profile_editor(uid):
         dbops.upeh(uid, value)
       if topic == 'time limitation':
         dbops.uplimit(uid, value)
-      if topic == 'environment':
+      if topic == 'dining place':
         dbops.upenv(uid, value)
     elif topic == 'goal':
       dbops.upgoal(uid, value)
