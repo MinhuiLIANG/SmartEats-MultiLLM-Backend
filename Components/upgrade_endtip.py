@@ -45,7 +45,7 @@ def getips(uid):
     [eating goal] -> {eatinggoal}
     [additional information] -> {LTMinfo}
    
-    I am a nutritionist. The above information points are the user's *Profile about health condition and diet information. I will provide *ONE SHORT* tip about healthy eating that is beneficial to the user's [health concern] and [eating goal] if it is not 'none'. The tip should also take the [additional information] into account if it is not 'none'.
+    I am a nutritionist. The above information points are the user's *Profile about health condition and diet information. I will provide *ONE SHORT* tip about healthy eating that is beneficial to the user's [health concern] and [eating goal] if it is not 'none'. The tip also need to take the [additional information] into account if it is not 'none'.
     I will carefully consider all the information in the user's *Profile and select only two to three pieces of information that are deemed to be important and beneficial to compose a dietary tip. This tip should NOT cover more than three pieces of information. I will focus on the information in the user's *Profile which is important. My tip is concise and in plain language. 
     After providing the tip, I will extract two or three keywords from the tip and start a new line to show the keywords. The keywords need to be specific and professional, and start with 'Here are the dietary keywords for you: ' (e.g., Here are the dietary keywords for you: moderate sodium, a mix of carbs, regular exercise).
     My tip and keywords:
