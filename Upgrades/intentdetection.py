@@ -71,7 +71,7 @@ def intentdetection(uid):
       messages=[
         {"role": "system", "content": prompt}
       ],
-      temperature=0,
+      temperature=0.5,
       max_tokens=15,
       top_p=1,
       frequency_penalty=0,    

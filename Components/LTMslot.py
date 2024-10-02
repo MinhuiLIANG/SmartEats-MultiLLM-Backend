@@ -19,8 +19,9 @@ def LTMslot_interface(uid):
     us = str(user)
     
     slot_prompt = '''
-    Extract and conclude the information about user's *resource constraints*, *religion*, or *special health condition* in the <conversation>. 
+    Extract and conclude the information about user's *resource constraints*, *religion*, *special health condition*, or *special requirements* in the <conversation>. 
     *resource constraints* covers *budget constraints*, *eating time or dining environment constraints*, or *food accessibility or cooking tools constraints*.
+    *special requirements* covers the desired food type (e.g., breakfast, desserts).
     If the user does not express above information in the <conversation>, your output must be 'none'.
     Examples:
     <conversation>:
