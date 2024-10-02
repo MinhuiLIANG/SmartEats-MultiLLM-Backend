@@ -25,7 +25,7 @@ def LTMslot_interface(uid):
     Examples:
     <conversation>:
     chatbot: By the way; do you like eating out or cooking for yourself?
-    user: I like eating out but obviously can't afford to do it very often so cook at home a lot.
+    user: I like eating out but it costs much so cook at home a lot.
     Your output: the user has a tight budget of food.
     
     <conversation>:
