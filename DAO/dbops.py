@@ -297,7 +297,7 @@ def addSmartEats(uid):
 def updateLTM(uid, info):
     LTMinfo = db.reference('/' + version + '/' + uid + "/conversation/LTMslots").get()
     newLTM = LTMinfo + ' and, ' + info
-    db.reference('/' + version + '/' + uid + "/userprofile/LTMslots").set(newLTM)
+    db.reference('/' + version + '/' + uid + "/conversation/LTMslots").set(newLTM)
 
 
 def getLTM(uid):
