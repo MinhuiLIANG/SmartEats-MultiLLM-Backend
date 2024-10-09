@@ -11,14 +11,37 @@ def intentdetection(uid):
     print('tasklist: ', tasklst)
 
     conv = dbops.getwholeconversation(uid)
-    
-    meta = dbops.getlastround(uid)
-    lst = meta.split('user: ')
-    Avery = lst[0].replace('chatbot: ','')
-    user = lst[1]
-    av = str(Avery)
-    us = str(user)
-    coversation = 'chatbot: ' + av + '\n' + 'user: ' + us
+
+    conversation = ''
+    curround = dbops.getround(uid)
+    if curround != 0:
+        meta = dbops.getlasttround(uid)
+        meta1 = meta[0]
+        meta2 = meta[1]
+        lst1 = meta1.split('user: ')
+        Avery1 = lst1[0].replace('chatbot: ','')
+        user1 = lst1[1]
+        av1 = str(Avery1)
+        us1 = str(user1)
+        conversation1 = 'chatbot: ' + av1 + '\n' + 'user: ' + us1
+
+        lst2 = meta2.split('user: ')
+        Avery2 = lst2[0].replace('chatbot: ','')
+        user2 = lst2[1]
+        av2 = str(Avery2)
+        us2 = str(user2)
+        conversation2 = 'chatbot: ' + av2 + '\n' + 'user: ' + us2
+
+        conversation = conversation1 + '\n\n' + conversation2
+    else:
+        meta = dbops.getlastround(uid)
+        lst = meta.split('user: ')
+        Avery = lst[0].replace('chatbot: ','')
+        user = lst[1]
+        av = str(Avery)
+        us = str(user)
+        conversation = 'chatbot: ' + av + '\n' + 'user: ' + us
+
     lasttask = dbops.getlasttask(uid)
     print('last topic: ', lasttask)
     controllerprompt = ''
@@ -34,14 +57,14 @@ def intentdetection(uid):
       
       [rest topics]-><{}>
       [last topic]-><{lasttask}>
-      [conversation log]->{coversation}
+      [conversation log]->{conversation}
       
       I am a chatbot managing the flow of a conversation including various topics related to user's eating habits. The Definition of topics are listed at the beginning. [last topic] represents the topic I just delivered, [rest topics] represents the topics I am going to ask, [conversation log] records how I delivered the last topic and the user's reaction to it.
-      *Caution!*: I can ONLY select a topic from [rest topics] and [last topic]. I MUST NOT select any topic not belonging to [rest topics] or [last topic]!
+      *Caution!*: I can *ONLY* select a topic from [rest topics] and [last topic]! I *MUST NOT* select any topic not belonging to [rest topics] or [last topic]!
       According to the [conversation log], I judge if the [last topic] were successfully asked and user was clear about it. If the I forgot to ask or user ask for further elaboration, I output the value of [last topic] (in <>).
-      If the [last topic] was successfully delivered, then I output a certain topic from [rest topics] which can make the conversation flow smoothly, natural and coherent. I will not deliver [last topic] again.
+      If the [last topic] was successfully delivered, I will NOT deliver [last topic] again. Instead, I will output a certain topic from [rest topics] according to the user's messages in [conversation log], which can make the conversation flow smoothly, natural and coherent. Different user messages will lead to different topic selection.
       Again, I will take the *Caution!* above very seriously.
-      '''.format(", ".join(tasklst), lasttask=lasttask, coversation=coversation)
+      '''.format(", ".join(tasklst), lasttask=lasttask, conversation=conversation)
     else:
       controllerprompt = '''
       [asked topics]-><'emotion', 'env', 'goal', 'his', 'hunger level', 'time limitation'>
@@ -71,7 +94,7 @@ def intentdetection(uid):
       messages=[
         {"role": "system", "content": prompt}
       ],
-      temperature=0.5,
+      temperature=0.7,
       max_tokens=15,
       top_p=1,
       frequency_penalty=0,    
