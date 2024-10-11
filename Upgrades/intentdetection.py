@@ -38,10 +38,17 @@ def intentdetection(uid):
       [conversation log]->{conversation}
       
       I am a chatbot managing the flow of a conversation including various topics related to user's eating habits. The Definition of topics are listed at the beginning. [last topic] represents the topic I just delivered, [rest topics] represents the topics I am going to ask, [conversation log] records how I delivered the last topic and the user's reaction to it.
-      *Caution!*: I can *ONLY* select a topic from [rest topics] and [last topic]! I *MUST NOT* select any topic not belonging to [rest topics] or [last topic]!
-      According to the [conversation log], I judge if the [last topic] were successfully asked and user was clear about it. If the I forgot to ask the question or user ask for further elaboration, I output the value of [last topic] (in <>).
-      If the [last topic] was successfully delivered, I will NOT deliver [last topic] again. Instead, I will output a certain topic from [rest topics] according to the user's messages in [conversation log], which can make the conversation flow smoothly, natural and coherent. Different user messages will lead to different topic selection.
-      Again, I will take the *Caution!* above very seriously.
+      According to the [conversation log], I judge if the [last topic] were successfully asked and user was clear about it. If the question is overlooked or user ask for further elaboration, I output the value of [last topic] (in <>).
+      If the [last topic] was successfully delivered, I will NOT deliver [last topic] again. Instead, I will output a certain topic *from [rest topics]* according to the user's messages in [conversation log], which can make the conversation flow smoothly, natural and coherent. In this case, the topic I select MUST from [rest topics]. Different user messages will lead to different topic selection. 
+      *Caution!*: I can *ONLY* select a topic from [rest topics] and [last topic]! I *MUST NOT* select any topic not belonging to [rest topics] or [last topic]! I will take the *Caution!* above very seriously.
+      
+      Here is a WRONG output: 
+      [rest topics]-><time limitation> 
+      [last topic]-><hunger level>
+      WRONG output: <goal>
+      This output is WRONG because <goal> is not from [rest topics] and [last topic].
+      
+      Now I understand how to manage the conversation flow and select the appropriate topic.
       '''.format(", ".join(tasklst), lasttask=lasttask, conversation=conversation)
     else:
       controllerprompt = '''
@@ -57,7 +64,7 @@ def intentdetection(uid):
       
       I am a chatbot managing the flow of a conversation including various topics related to user's eating habits. [asked topics] represents the topics I have delivered.
       According to the [conversation log] below, I judge if topics in [asked topics] were successfully asked and user was clear about them. If I forgot to ask or user was not clear about a certain topic in [asked topics], output the topic user was not clear.
-      If all topics in [asked topics] is successfully delivered, I will output 'OK'.
+      If all topics in [asked topics] are successfully delivered, I will output 'OK'.
       
       [conversation log]->{conv}
       '''.format(conv=conv)
@@ -72,7 +79,7 @@ def intentdetection(uid):
       messages=[
         {"role": "system", "content": prompt}
       ],
-      temperature=0.7,
+      temperature=0.5,
       max_tokens=15,
       top_p=1,
       frequency_penalty=0,    
