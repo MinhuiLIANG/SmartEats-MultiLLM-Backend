@@ -39,15 +39,15 @@ def prerect_interface(uid):
         [preference]-><{dietarypreference}>
         [health concern]-><{healthconcern}>
         
-        *Task -> List five *non-traditional* cuisines that are very *popular*, loved, and widely eaten by people in [location] according to the information above. Do not recommend anything peculiar.
+        *Task -> List five *non-traditional* and *trending* cuisines that are very *novel*, *popular* and widely eaten by people in [location] according to the information above. Do not recommend anything peculiar.
         *Rules ->
         1. Each dish you list must be a combination of two foods: one main food and one side food, they must be nutritionally balanced and varied, including vitamins, carbs, and protein.
         2. Each dish needs to be below [calorie restriction].
         3. You must consider [dietary restriction] in your listed dishes if the it is not 'none'.
         4. People provide [feedback] regarding [first food] and [second food], which were recommended by you previously. Make another recommendation according to this information. If the people explicitly mention in the *feedback* the specific, healthy enough food they desire, I will list that dish.
-        5. Be careful about people's [health concern] if it is not 'none', the dishes should be safe and beneficial to it. This requirement has the highest priority.
+        5. Be careful about people's [health concern] if it is not 'none', the dishes should be safe and beneficial to it.
         6. For each dish, the main food is the one that fits people's [preference] and [health concern] if they are not 'none'. You should first determine the main food and it should be specific. The side food is other foods to provide a balanced and rich diet. The side food can be less specific, such as 'rice', 'vegetable', and  'fruits'. Note that the combination of main food and side food must be nutritionally balanced, including vitamins, carbs, and protein.
-        7. The dishes can be a little bit surprising and trendy.
+        7. The dishes must be delicious and widely loved, and can be a little bit surprising.
         8. Just list the dishes and do not explain the reason.
         For example, in the food 'Grilled salmon with quinoa and steamed broccoli', if people's [health concern] is about <blood pressure>, then the main food is 'steamed broccoli' because its fiber and minerals are good for blood pressure. The side food is 'Grilled salmon with quinoa', no need to be this specific, you should summarize it. So the food you list should be 'seafood with quinoa and steamed broccoli'.
         *Example->
@@ -65,14 +65,14 @@ def prerect_interface(uid):
         [preference]-><{dietarypreference}>
         [health concern]-><{healthconcern}>
         
-        *Task -> List five *non-traditional* cuisines that are very *popular*, loved, and widely eaten by people in [location] according to the information above. Do not recommend anything peculiar.
+        *Task -> List five *non-traditional* and *trending* cuisines that are very *novel*, *popular* and widely eaten by people in [location] according to the information above. Do not recommend anything peculiar.
         *Rules ->
         1. Each dish you list must be a combination of two foods: one main food and one side food, they must be nutritionally balanced and varied, including vitamins, carbs, and protein.
         2. Each dish needs to be below [calorie restriction].
         3. You must consider [dietary restriction] in your listed dishes if the it is not 'none'.
-        4. Be careful about people's [health concern] if it is not 'none', the dishes should be safe and beneficial to it. This requirement has the highest priority.
+        4. Be careful about people's [health concern] if it is not 'none', the dishes should be safe and beneficial to it.
         5. For each dish, the main food is the one that fits people's [preference] and [health concern] if they are not 'none'. You should first determine the main food and it should be specific. The side food is other foods to provide a balanced and rich diet. The side food can be less specific, such as 'rice', 'vegetable', and  'fruits'. Note that the combination of main food and side food must be nutritionally balanced, including vitamins, carbs, and protein.
-        6. The dishes can be a little bit surprising and trendy.
+        6. The dishes must be delicious and widely loved, and can be a little bit surprising.
         7. Just list the dishes and do not explain the reason.
         For example, in the food 'Grilled salmon with quinoa and steamed broccoli', if people's [health concern] is about <blood pressure>, then the main food is 'steamed broccoli' because its fiber and minerals are good for blood pressure. The side food is 'Grilled salmon with quinoa', no need to be this specific, you should summarize it. So the food you list should be 'seafood with quinoa and steamed broccoli'.
         *Example->

@@ -8,4 +8,10 @@ prefixes = {
     "end1":"I am glad that the recommendation works! Hope you enjoy the meal when you try it out!",
     "end2y":"I am glad you like my recommendation! Enjoy your meal when you try it out!",
     "end2n":"It seems like my recommendation skill needs some improvement, but thank you for your feedback. This is the end of the conversation.",
+    "emo": "How are you feeling these days?",
+    "eh": "Do you have a planned time for eating, or do you just eat when feeling hungry?",
+    "time": "In general, how long do you set aside for each meal?",
+    "env": "Do you prefer to eat at a restaurant or cook at home?",
+    "his": "What are your typical meals?",
+    "goal": "What do you hope to achieve through a healthy diet?",
 }

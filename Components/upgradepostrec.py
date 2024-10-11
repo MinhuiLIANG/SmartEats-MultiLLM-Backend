@@ -72,10 +72,10 @@ def postrec_interface(round, uid):
 
         recPrompt = '''
         *Your information:
-        [emotion] -> {emotion}
+        [emotion status] -> {emotion}
         [eating habit] -> {eatinghabit}
-        [time limitation] -> {limitation}
-        [eating goal] -> {eatinggoal}
+        [dining time limitation] -> {limitation}
+        [dietary goal] -> {eatinggoal}
         [health concern] -> {healthconcern}
         [feedback] -> {feedback}
         [preference] -> {preferedfood}
@@ -84,19 +84,19 @@ def postrec_interface(round, uid):
         [food list two] -> {food6},{food7},{food8},{food9},{food10}
     
         *Requirements:
-        1: If your [emotion] is <negative>, I will recommend comfort food, with a warm, soft, sweet taste.
+        1: If your [emotion status] is <negative>, I will recommend comfort food, with a warm, soft, sweet taste.
         2: If your [eating habit] is <causal>, I will assume you are hungry, and recommend more carb-heavy, satiating foods.
-        3: If your [time limitation] is <sufficient>, I will recommend sumptuous cuisine; if your [time limitation] is <limited>, I will recommend very common foods, such as fast food.
+        3: If your [dining time limitation] is <sufficient>, I will recommend sumptuous cuisine; if your [time limitation] is <limited>, I will recommend very common and easy to prepared foods, such as fast foods.
         4: If your [preference] is not 'none', I will try to recommend a food similar to your [preference].
-        5: I will recommend food that is beneficial for your [eating goal].
+        5: I will recommend food that is beneficial for your [dietary goal].
         6: I will carefully consider the [feedback] before making recommendations. If your [feedback] is not healthy, I would not adopt it and I would state this in my explanation and recommend a good healthy diet.
         7: Same as 5, if your [health concern] is not 'none', I will carefully consider your [health concern], recommend food that is appropriate and beneficial to your [health concern], and refer to it in the subsequent explanation.
-        8: [health concern] has the highest priority, and if [eating goal], [preference], or [feedback] conflicts with [health concern], priority is given to [health concern], with an explanation as to why.
+        8: [health concern] has the highest priority, and if [dietary goal], [preference], or [feedback] conflicts with [health concern], priority is given to [health concern], with an explanation as to why.
         9: [additional conditions] may include your resource constraints, religous belief, and special health conditions. If [additional conditions] is not 'none', I will consider these aspects when selecting food and incorporate these part of information in explanation.
         10: I must make sure the two foods I recommend distinct from each other.
     
-        As a nutrition expert, I will recommend two foods to you: I must select one food from [food list one] as the <first dish>, and the other food from [food list two] as the <second dish> to recommend to you following *Your information and *Requirements. But I will NOT tell [food list one], [food list two] in the <reason>. At the same time, I will try to make the two dishes I select *distinct from each other* as much as possible.
-        Each recommendation of the two foods is followed by the <reason> why I recommended this to you. The <reason>, presented in plain and easy-to-understand language, will highlight the benefits of food for your health, and cover *ALL points* in *Requirements, while prioritizing the explanation of [time limitation], [eating goal], [preference] also [feedback], and [health concern] if they are not 'none' or empty.
+        As a nutrition expert, I will recommend two foods to you by selecting one food from [food list one] as the <first dish>, and the other food from [food list two] as the <second dish> to recommend to you following *Your information and *Requirements. But I will NOT tell [food list one], [food list two] in the <reason>. At the same time, I will try to make the two dishes I select *distinct from each other* as much as possible.
+        Each recommendation of the two foods is followed by the <reason> why I recommended this to you. The <reason>, presented in plain and easy-to-understand language, will highlight the benefits of food for your health, and cover *ALL points* in *Requirements, while prioritizing the explanation of [dining time limitation], [dietary goal], [preference] also [feedback], and [health concern] if they are not 'none' or empty.
     
         IMPORTANT: The food and reason are separated by '[cat]'; the two recommendations are separated by '[sep]'.
         So my output's format should be like: '<first food> [cat] <reason> [sep] <second food> [cat] <reason>'. I will remember to use [sep]!
