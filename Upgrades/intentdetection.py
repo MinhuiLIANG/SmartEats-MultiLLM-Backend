@@ -6,7 +6,7 @@ from DAO import dbops
 
 #uid = 'asdkhasd'
 def intentdetection(uid):
-    origintask = ['emotion', 'env', 'goal', 'his', 'hunger level', 'time limitation']
+    origintask = ['emotion', 'env', 'goal', 'his', 'hunger level', 'time limitation', 'preference', 'budget', 'social', 'culture']
     tasklst = dbops.gettasklst(uid)
     print('tasklist: ', tasklst)
 
@@ -30,8 +30,12 @@ def intentdetection(uid):
       env: the user's daily dining environment, eating outside or cooking at home
       goal: the user's dietary goal or requiring user to further elaborate health conditions
       his: the user's general daily food patterns
-      hunger level: the user's eating habits, whether the user eat regularly or just eat when hungry.
-      time limitation: how much time the user can spend for a meal.
+      hunger level: the user's eating habits, whether the user eat regularly or just eat when hungry
+      time limitation: how much time the user can spend for a meal
+      preference: asking about the user's food or flavor preference
+      budget: asking about the user's budget for meals, whether it is flexible or tight
+      social: asking about the social environment when the user has meals, whether usually eating alone or with others
+      culture: asking about the preferred cuisine types or cooking styles
       
       [rest topics]-><{}>
       [last topic]-><{lasttask}>
@@ -52,15 +56,19 @@ def intentdetection(uid):
       '''.format(", ".join(tasklst), lasttask=lasttask, conversation=conversation)
     else:
       controllerprompt = '''
-      [asked topics]-><'emotion', 'env', 'goal', 'his', 'hunger level', 'time limitation'>
+      [asked topics]-><'emotion', 'env', 'goal', 'his', 'hunger level', 'time limitation', 'preference', 'budget', 'social', 'culture'>
       
       Definition of topics:
       emotion: asking about the user's recent emotion status
       env: asking about the user's daily dining environment, eating outside or cooking at home
       goal: asking about the user's dietary goal or requiring user to further elaborate health conditions
       his: asking about the user's general daily food patterns
-      hunger level: asking about the user's eating habits, whether the user eat regularly or just eat when hungry.
-      time limitation: asking about how much time the user can spend for a meal.
+      hunger level: asking about the user's eating habits, whether the user eat regularly or just eat when hungry
+      time limitation: asking about how much time the user can spend for a meal
+      preference: asking about the user's food or flavor preference
+      budget: asking about the user's budget for meals, whether it is flexible or tight
+      social: asking about the social environment when the user has meals, whether usually eating alone or with others
+      culture: asking about the preferred cuisine types or cooking styles
       
       I am a chatbot managing the flow of a conversation including various topics related to user's eating habits. [asked topics] represents the topics I have delivered.
       According to the [conversation log] below, I judge if topics in [asked topics] were successfully asked and user was clear about them. If I forgot to ask or user was not clear about a certain topic in [asked topics], output the topic user was not clear.

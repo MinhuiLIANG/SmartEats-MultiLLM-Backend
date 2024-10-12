@@ -5,7 +5,7 @@ from multiprocessing import cpu_count, Process
 import time
 import sys 
 sys.path.append("..") 
-import topicTree
+import topicTreesm
 from Controllers import IBInterface
 from Controllers import upgradeCCInterface
 from Controllers import PreferenceInterface
@@ -38,10 +38,10 @@ def cen_api():
     if topic == 'rec1':
         action = control
         print('{tp} & {ac}'.format(tp=topic,ac=action))
-    elif topic == 'chitchat' and cc_cnt > 8:
+    elif topic == 'chitchat' and cc_cnt > 13:
         action = '<down>'
         print('{tp} & {ac}'.format(tp=topic,ac=action))
-    elif topic == 'chitchat' and cc_cnt < 6:
+    elif topic == 'chitchat' and cc_cnt < 10:
         action = upgradeConInterface.controlInterface(uid=uid)
         if action != '<keep>':
             action = '<keep>'
@@ -58,7 +58,7 @@ def cen_api():
         action = '<down>'
         print('{tp} & {ac}'.format(tp=topic,ac=action))
 
-    nxttopic = topicTree.movepter(topic, action)
+    nxttopic = topicTreesm.movepter(topic, action)
 
     dbops.uptopic(uid, nxttopic)
     
@@ -85,11 +85,6 @@ def cen_api():
         cc_cnt = dbops.getround(uid)
         cc_cnt = cc_cnt + 1
         dbops.upround(uid, cc_cnt)
-    if topic == 'preference':
-        bot = PreferenceInterface.PreferInterface(uid=uid)['pre']
-        print('Avery: ', bot)
-        #user = input("user: ")
-        #dbops.upconversation_u(uid, user)
     if topic == 'rec1':
         stimereco = time.time()
         res = upgradeRecInterface.RecInterface('one',uid)

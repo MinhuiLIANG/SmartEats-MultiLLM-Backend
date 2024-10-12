@@ -24,26 +24,35 @@ def slot_interface(uid):
     topic 3: <time limitation> -> value 3: [<limited>, <neutral>, <sufficient>]
     topic 4: <goal> -> value 4: [User's goal in the response]
     topic 5: <dining place> -> value 5: [<outside>, <home>]
-    topic 6: <eating history> -> value 6: [Food type in User's sentence]
+    topic 6: <eating history> -> value 6: [food type in User's message]
+    topic 7: <food preference> -> value 7: [preferred food type in User's message]
+    topic 8: <budget> -> value 8: [<flexible>, <tight>]
+    topic 9: <social eating> -> value 9: [<alone>, <group>]
+    topic 10: <dietary culture> value 10: [dietary culture type in User's message]
 
     The above pairs show the map of topics and values, each topic (such as <dining place>, which asks User eat at outside or home) relates to several values (such as <outside>, <home>).
     There will be a single round conversation, in which the assistant asks a question related to one of the topics shown above.
     Then the User will respond. Please output the one value in values related to the topic the assistant asks according to the content of the User's response.
 
-    Here are two examples:
+    Here are three examples:
     assistant: I understand how you feel. Hunger can be quite distracting. So, how much time do you have to eat right now?
     User: I have limited time for the meal.
     
     assistant: Hi it's great to see you too! How can I assist you today? Let's talk about your eating goals or any health plans you may have.
     User: I think I want to lose weight.
-
+    
+    assistant: Seems you have covered high quality protein, fat, carbs, and vitamin in your daily diet. Btw, do you usually eat alone or have meals with your family or colleagues?
+    User: Mostly with my family members, I need to cook for them.
+    
     First, you need to judge what is the topic according to the assistant's words. In the first example, 'how much time do you have to eat right now?' indicates the topic is <time limitation>;
     in the second example, 'Let's talk about your eating goals or any health plans you may have.' means that the assistant is asking about User's goal, so the topic is <goal>.
+    in the third example, 'eat alone or have meals with your family or colleagues' indicates the assistant is asking about the social environment when the user have meals, so the topic is <social eating>.
     
-    Second, you need to judge what value is related to the topic you just find according to the User's words. If the value is abstract, like [Food type in User's sentence], you should extract the food information in the user's sentence as the value. In the first example, 'limited time for the meal' means the <time limitation> is <limited>;
+    Second, you need to judge what value is related to the topic you just find according to the User's message. If the value is abstract, like [food type in User's message], you should extract the food information in the user's message as the value. In the first example, 'limited time for the meal' means the <time limitation> is <limited>;
     in the second example, the value of <goal> is the user's goal in the response, so the value is <I want to lose weight.>, just extract the goal in the user's response.
+    in the third example, 'Mostly with my family members' means the user eat with a group of people, so the value should be <group>.
     
-    So your output of the first example is: <time limitation>:<limited>; for the second example, it is <goal>:<I want to lose weight.>
+    So your output of the first example is: <time limitation>:<limited>; for the second example, it is <goal>:<I want to lose weight.>; for the third example, it is <social eating>:<group>.
     Now try this conversation:\n
     '''
   
@@ -70,8 +79,8 @@ def profile_editor(uid):
   res = slot_interface(uid)
   print("********", res)
   lst = res.split(':')
-  topic_list = ['emotion', 'eating habit', 'time limitation', 'goal', 'dining place', 'eating history']
-  value_list = ['positive', 'neutral', 'negative', 'limited', 'sufficient', 'regular', 'casual', 'outside', 'home']
+  topic_list = ['emotion', 'eating habit', 'time limitation', 'goal', 'dining place', 'eating history', 'food preference', 'budget', 'social eating', 'dietary culture']
+  value_list = ['positive', 'neutral', 'negative', 'limited', 'sufficient', 'regular', 'casual', 'outside', 'home', 'flexible', 'tight', 'alone', 'group']
   if len(lst)>1:
     topic = lst[0].replace('<','').replace('>','')
     value = lst[1].replace('<','').replace('>','')
@@ -84,10 +93,18 @@ def profile_editor(uid):
         dbops.uplimit(uid, value)
       if topic == 'dining place':
         dbops.upenv(uid, value)
+      if topic == 'budget':
+        dbops.upbudget(uid, value)
+      if topic == 'social eating':
+        dbops.upsocial(uid, value)
     elif topic == 'goal':
       dbops.upgoal(uid, value)
     elif topic == 'eating history':
       dbops.uphistory(uid, value)
+    elif topic == 'food preference':
+      dbops.upprefer(uid, value)
+    elif topic == 'dietary culture':
+      dbops.upculture(uid, value)
   
 
 #Avery = 'OK I understand how you feel man, then what is your eating goal of this meal?'

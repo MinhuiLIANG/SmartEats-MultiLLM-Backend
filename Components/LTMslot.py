@@ -20,14 +20,14 @@ def LTMslot_interface(uid):
     
     slot_prompt = '''
     Extract and conclude the information about user's *resource constraints*, *religion*, *special health condition*, or *special requirements* in the <conversation>. 
-    *resource constraints* covers *budget constraints*, *eating time or dining environment constraints*, or *food accessibility or cooking tools constraints*.
+    *resource constraints* covers *eating time or dining environment constraints*, or *food accessibility or cooking tools constraints*.
     *special requirements* covers the desired food type (e.g., breakfast, desserts).
     If the user does not express above information in the <conversation>, your output must be 'none'.
     Examples:
     <conversation>:
-    chatbot: By the way; do you like eating out or cooking for yourself?
-    user: I like eating out but it costs much so cook at home a lot.
-    Your output: the user has a tight budget of food.
+    chatbot: Incorporating fruits and leafy greens into your diets is beneficial for your vitamin intake. By the way, do you like eating out or cooking for yourself?
+    user: I like eating out but since I am living in Japan, it is hard to find fresh fruits and leafy greens in restaurants.
+    Your output: it is challenging for the user to access fresh fruits and leafy greens
     
     <conversation>:
     chatbot: You mentioned reducing acid reflux. Could you share more about that?

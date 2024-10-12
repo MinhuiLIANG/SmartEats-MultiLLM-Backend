@@ -223,6 +223,9 @@ def addSmartEats(uid):
     preference = 'delicous healthy food'
     env = 'home_'
     his = 'delicious local foods_'
+    budget = 'neutral_'
+    culture = 'local style_'
+    social = 'alone_'
     accfrst = "none"
     accscnd = "none"
     accfood = "none"
@@ -231,7 +234,7 @@ def addSmartEats(uid):
                 "S_weight": weight, "S_location": location, "S_character": character, "S_persona": persona,
                 "S_style": style, "S_health": healthconcern, "S_history": his, "D_contraindication": contraindication,
                 "D_emotion": emotion, "D_eating habit": habit, "D_time limitation": limitation, "D_goal": goal,
-                "D_env": env, "D_preference": preference, "D_firstaccept": accfrst, "D_secondaccept": accscnd,
+                "D_env": env, "D_preference": preference, "D_budget": budget, "D_dietary culture": culture, "D_social eating": social, "D_firstaccept": accfrst, "D_secondaccept": accscnd,
                 "D_accfood": accfood}
 
     chitchatround = 0
@@ -245,7 +248,7 @@ def addSmartEats(uid):
     infoctime = [0]
     rectime = [0]
 
-    tasks = {"emotion": 0, "hunger level": 0, "time limitation": 0, "goal": 0, "env": 0, "his": 0}
+    tasks = {"emotion": 0, "hunger level": 0, "time limitation": 0, "goal": 0, "env": 0, "his": 0, "preference": 0, "budget": 0, "social": 0, "culture": 0}
     LTMslots = ''
 
     convinit = {"D_history": chathistory, "D_currenttopic": currenttopic, "D_chitchatround": chitchatround,
@@ -409,6 +412,21 @@ def getenv(uid):
 def getprefer(uid):
     prefer = db.reference('/' + version + '/' + uid + "/userprofile/D_preference").get()
     return prefer
+
+
+def getbudget(uid):
+    budget = db.reference('/' + version + '/' + uid + "/userprofile/D_budget").get()
+    return budget
+
+
+def getsocial(uid):
+    social = db.reference('/' + version + '/' + uid + "/userprofile/D_social eating").get()
+    return social
+
+
+def getculture(uid):
+    culture = db.reference('/' + version + '/' + uid + "/userprofile/D_dietary culture").get()
+    return culture
 
 
 def gettopic(uid):
@@ -599,6 +617,18 @@ def upenv(uid, env):
 
 def upprefer(uid, prefer):
     db.reference('/' + version + '/' + uid + "/userprofile/D_preference").set(prefer)
+    
+    
+def upbudget(uid, budget):
+    db.reference('/' + version + '/' + uid + "/userprofile/D_budget").set(budget)
+
+
+def upsocial(uid, social):
+    db.reference('/' + version + '/' + uid + "/userprofile/D_social eating").set(social)
+
+
+def upculture(uid, culture):
+    db.reference('/' + version + '/' + uid + "/userprofile/D_dietary culture").set(culture)
 
 
 def upcon(uid, con):

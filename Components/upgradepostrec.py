@@ -11,6 +11,7 @@ from Components import slotFiller4FB
 from Components import upgradeprereco
 from Components import upgradeprerect
 from Components import entityExtractor
+from Components import upgradeSlotFiller
 from DAO import dbops
 import json
 
@@ -21,6 +22,7 @@ def postrec_interface(round, uid):
     with concurrent.futures.ThreadPoolExecutor() as executor:
         aftfix = ''
         if round == 'one':
+            upgradeSlotFiller.profile_editor(uid=uid)
             slotFiller4pre.profile_editor(uid=uid)
             prefix = fixedSentences.prefixes["rec"]
             aftfix = fixedSentences.prefixes["aftrec1"]
