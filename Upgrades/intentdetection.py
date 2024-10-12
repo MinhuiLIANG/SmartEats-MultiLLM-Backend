@@ -26,55 +26,59 @@ def intentdetection(uid):
     if tasklst != 'finished':
       controllerprompt = '''
       Definition of topics:
-      emotion: the user's recent emotion status
-      env: the user's daily dining environment, eating outside or cooking at home
-      goal: the user's dietary goal or requiring user to further elaborate health conditions
-      his: the user's general daily food patterns
-      hunger level: the user's eating habits, whether the user eat regularly or just eat when hungry
-      time limitation: how much time the user can spend for a meal
-      preference: asking about the user's food or flavor preference
-      budget: asking about the user's budget for meals, whether it is flexible or tight
-      social: asking about the social environment when the user has meals, whether usually eating alone or with others
-      culture: asking about the user's preferred cuisine type or cooking style
+      <emotion>: asking about the user's recent emotion status
+      <env>: asking about the user's daily dining environment, eating outside or cooking at home
+      <goal>: asking about the user's dietary goal or requiring user to further elaborate health conditions
+      <his>: asking about the user's general daily food patterns
+      <hunger level>: asking about the user's eating habits, whether the user eat regularly or just eat when hungry
+      <time limitation>: asking about how much time the user can spend for a meal
+      <preference>: asking about the user's food or flavor preference
+      <budget>: asking about the user's budget for meals, whether it is flexible or tight
+      <social>: asking about the social environment when the user has meals, whether usually eating alone or with others
+      <culture>: asking about the user's preferred cuisine type or cooking style
       
       [rest topics]-><{}>
       [last topic]-><{lasttask}>
-      [conversation log]->{conversation}
+      [conversation log]->
+      <{conversation}>
       
-      I am a chatbot managing the flow of a conversation including various topics related to user's eating habits. The Definition of topics are listed at the beginning. [last topic] represents the topic I just delivered, [rest topics] represents the topics I am going to ask, [conversation log] records how I delivered the last topic and the user's reaction to it.
-      According to the [conversation log], I judge if the [last topic] were successfully asked and user was clear about it. If the question is overlooked or user ask for further elaboration, I output the value of [last topic] (in <>).
-      If the [last topic] was successfully delivered, I will NOT deliver [last topic] again. Instead, I will output a certain topic *from [rest topics]* according to the user's messages in [conversation log], which can make the conversation flow smoothly, natural and coherent. In this case, the topic I select MUST from [rest topics]. Different user messages will lead to different topic selection. 
+      I am managing the flow of a conversation including various topics related to user's eating habits. The Definition of topics are listed at the beginning. [last topic] represents the topic just delivered in [conversation log] in the form of a question corresponding to it, [rest topics] represents the topics that are going to be asked, [conversation log] records how the [last topic] is delivered and the user's reaction to it. 
+      In [conversation log], the topics are delivered to the user by asking corresponding questions relevant to the Definition of topics above. For instance, the chabot may deliver <culture> topic by asking 'By the way, do you have a preferred cuisine type or cooking style?'
+      According to the [conversation log], I judge if the question corresponding to [last topic] were successfully asked and user was clear about it. If the question is (1) overlooked (chatbot did not ask any questions), (2) not relevant to [last topic] (chatbot asked a question not related to [last topic]), or (3) user ask for further elaboration for the question, I will output the value of [last topic] (in <>).
+      If the [last topic] was successfully delivered, I *MUST NOT* deliver [last topic] again. Instead, I will output a certain topic *from [rest topics]* according to the user's message in [conversation log], which can make the conversation flow smoothly, natural and coherent. In this case, the topic I select MUST from [rest topics].
+      
       *Caution!*: I can *ONLY* select a topic from [rest topics] and [last topic]! I *MUST NOT* select any topic not belonging to [rest topics] or [last topic]! I will take the *Caution!* above very seriously.
-      
-      Here is a WRONG output: 
+      Here is an example of a WRONG output: 
       [rest topics]-><time limitation> 
       [last topic]-><hunger level>
       WRONG output: <goal>
-      This output is WRONG because <goal> is not from [rest topics] and [last topic].
+      Above output is WRONG because <goal> is not from [rest topics] and [last topic].
       
-      Now I understand how to manage the conversation flow and select the appropriate topic.
+      Looking at the instruction and example above, now I understand how to manage the conversation flow and select the appropriate topic.
       '''.format(", ".join(tasklst), lasttask=lasttask, conversation=conversation)
     else:
       controllerprompt = '''
       [asked topics]-><'emotion', 'env', 'goal', 'his', 'hunger level', 'time limitation', 'preference', 'budget', 'social', 'culture'>
       
       Definition of topics:
-      emotion: asking about the user's recent emotion status
-      env: asking about the user's daily dining environment, eating outside or cooking at home
-      goal: asking about the user's dietary goal or requiring user to further elaborate health conditions
-      his: asking about the user's general daily food patterns
-      hunger level: asking about the user's eating habits, whether the user eat regularly or just eat when hungry
-      time limitation: asking about how much time the user can spend for a meal
-      preference: asking about the user's food or flavor preference
-      budget: asking about the user's budget for meals, whether it is flexible or tight
-      social: asking about the social environment when the user has meals, whether usually eating alone or with others
-      culture: asking about the user's preferred cuisine type or cooking style
+      <emotion>: asking about the user's recent emotion status
+      <env>: asking about the user's daily dining environment, eating outside or cooking at home
+      <goal>: asking about the user's dietary goal or requiring user to further elaborate health conditions
+      <his>: asking about the user's general daily food patterns
+      <hunger level>: asking about the user's eating habits, whether the user eat regularly or just eat when hungry
+      <time limitation>: asking about how much time the user can spend for a meal
+      <preference>: asking about the user's food or flavor preference
+      <budget>: asking about the user's budget for meals, whether it is flexible or tight
+      <social>: asking about the social environment when the user has meals, whether usually eating alone or with others
+      <culture>: asking about the user's preferred cuisine type or cooking style
       
-      I am a chatbot managing the flow of a conversation including various topics related to user's eating habits. [asked topics] represents the topics I have delivered.
-      According to the [conversation log] below, I judge if topics in [asked topics] were successfully asked and user was clear about them. If I forgot to ask or user was not clear about a certain topic in [asked topics], output the topic user was not clear.
+      I am managing the flow of a conversation including various topics related to user's eating habits. The Definition of topics are listed above. 
+      In [conversation log] below, the topics are delivered to the user by asking corresponding questions relevant to the Definition of topics above. For instance, the chabot may deliver <culture> topic by asking 'By the way, do you have a preferred cuisine type or cooking style?'
+      According to the [conversation log] below, I judge if questions corresponding to the topics in [asked topics] were all successfully asked and user was clear about them. If a certain topic in [asked topics] is overlooked, forgot to deliver, or the user is not clear about its meaning, output the topic.
       If all topics in [asked topics] are successfully delivered, I will output 'OK'.
       
-      [conversation log]->{conv}
+      [conversation log]->
+      {conv}
       '''.format(conv=conv)
     
     client = OpenAI(api_key = "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")
@@ -87,7 +91,7 @@ def intentdetection(uid):
       messages=[
         {"role": "system", "content": prompt}
       ],
-      temperature=0.5,
+      temperature=0.3,
       max_tokens=15,
       top_p=1,
       frequency_penalty=0,    
