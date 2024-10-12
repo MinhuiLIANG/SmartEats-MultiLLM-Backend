@@ -23,7 +23,10 @@ def intentdetection(uid):
     lasttask = dbops.getlasttask(uid)
     print('last topic: ', lasttask)
     controllerprompt = ''
+    avaitask = []
     if tasklst != 'finished':
+      avaitask = tasklst
+      avaitask.append(lasttask)
       controllerprompt = '''
       Definition of topics:
       <emotion>: asking about the user's recent emotion status
@@ -48,11 +51,11 @@ def intentdetection(uid):
       If the [last topic] was successfully delivered, I *MUST NOT* deliver [last topic] again. Instead, I will output a certain topic *from [rest topics]* according to the user's message in [conversation log], which can make the conversation flow smoothly, natural and coherent. In this case, the topic I select MUST from [rest topics].
       
       *Caution!*: I can *ONLY* select a topic from [rest topics] and [last topic]! I *MUST NOT* select any topic not belonging to [rest topics] or [last topic]! I will take the *Caution!* above very seriously.
-      Here is an example of a WRONG output: 
+      *KEEP IN MIND*: Here is an example of a WRONG output: 
       [rest topics]-><time limitation> 
       [last topic]-><hunger level>
       WRONG output: <goal>
-      Above output is WRONG because <goal> is not from [rest topics] and [last topic].
+      Above output is WRONG because <goal> is not from [rest topics] and [last topic]. In fact, any topics other than <time limitation> or <hunger level> is WRONG in this example!
       
       Looking at the instruction and example above, now I understand how to manage the conversation flow and select the appropriate topic.
       '''.format(", ".join(tasklst), lasttask=lasttask, conversation=conversation)
@@ -102,9 +105,22 @@ def intentdetection(uid):
     res = res.replace("<", "").replace(">", "").replace("'", "")
     
     if res in origintask:
-      print('module output result: ', res)
-      dbops.upcurrenttask(uid, res)
-      return res
+      if tasklst == 'finished':
+        print('module output result: ', res)
+        dbops.upcurrenttask(uid, res)
+        return res
+      else:
+        if res in avaitask:
+          print('select an available task')
+          print('module output result: ', res)
+          dbops.upcurrenttask(uid, res)
+          return res
+        else:
+          print('select an unavailable task')
+          print('module output result: ', res)
+          rantask = random.choice(tasklst)
+          dbops.upcurrenttask(uid, rantask)
+          return rantask
     else:
       print('mistake, output: ', res)
       if tasklst == 'finished':
