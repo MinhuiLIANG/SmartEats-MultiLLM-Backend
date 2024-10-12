@@ -35,7 +35,7 @@ def intentdetection(uid):
       preference: asking about the user's food or flavor preference
       budget: asking about the user's budget for meals, whether it is flexible or tight
       social: asking about the social environment when the user has meals, whether usually eating alone or with others
-      culture: asking about the preferred cuisine types or cooking styles
+      culture: asking about the user's preferred cuisine type or cooking style
       
       [rest topics]-><{}>
       [last topic]-><{lasttask}>
@@ -68,7 +68,7 @@ def intentdetection(uid):
       preference: asking about the user's food or flavor preference
       budget: asking about the user's budget for meals, whether it is flexible or tight
       social: asking about the social environment when the user has meals, whether usually eating alone or with others
-      culture: asking about the preferred cuisine types or cooking styles
+      culture: asking about the user's preferred cuisine type or cooking style
       
       I am a chatbot managing the flow of a conversation including various topics related to user's eating habits. [asked topics] represents the topics I have delivered.
       According to the [conversation log] below, I judge if topics in [asked topics] were successfully asked and user was clear about them. If I forgot to ask or user was not clear about a certain topic in [asked topics], output the topic user was not clear.

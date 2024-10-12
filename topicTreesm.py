@@ -2,8 +2,9 @@
 #it is much more simpler just like a intent detector.
 
 ib = {'name':'icebreak','child1':'chitchat','child2':'none','parent':'none'}
-cc = {'name':'chitchat','child1':'rec1','child2':'none','parent':'icebreak'}
-r1 = {'name':'rec1','child1':'end1','child2':'feedback','parent':'chitchat'}
+cc = {'name':'chitchat','child1':'add','child2':'none','parent':'icebreak'}
+add = {'name':'add','child1':'rec1','child2':'none','parent':'chitchat'}
+r1 = {'name':'rec1','child1':'end1','child2':'feedback','parent':'add'}
 e1 = {'name':'end1','child1':'none','child2':'none','parent':'rec1'}
 fb = {'name':'feedback','child1':'rec2','child2':'none','parent':'rec1'}
 r2 = {'name':'rec2','child1':'end2','child2':'none','parent':'feedback'}
@@ -12,13 +13,14 @@ e2 = {'name':'end2','child1':'none','child2':'none','parent':'rec2'}
 topic_tree = []
 topic_tree.append(ib)
 topic_tree.append(cc)
+topic_tree.append(add)
 topic_tree.append(r1)
 topic_tree.append(e1)
 topic_tree.append(fb)
 topic_tree.append(r2)
 topic_tree.append(e2)
 
-constraits = [('icebreak','down'),('chitchat','down'),('chitchat','keep'),('rec1','left'),('rec1','right'),('feedback','down'),('rec2','down')]
+constraits = [('icebreak','down'),('chitchat','down'),('chitchat','keep'),('add','down'),('rec1','left'),('rec1','right'),('feedback','down'),('rec2','down')]
 
 #currtopic: just finished, AKA last topic
 def goDown(currtopic):

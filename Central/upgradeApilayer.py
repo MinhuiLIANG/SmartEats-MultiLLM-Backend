@@ -14,6 +14,7 @@ from Controllers import FBInterface
 from Controllers import upgradeEndone
 from Controllers import upgradeEndtwo
 from Controllers import upgradeConInterface
+from Controllers import addInterface
 from DAO import dbops
 
 #uid = 'asdkhasd'
@@ -85,6 +86,11 @@ def cen_api():
         cc_cnt = dbops.getround(uid)
         cc_cnt = cc_cnt + 1
         dbops.upround(uid, cc_cnt)
+    if topic == 'add':
+        bot = addInterface.AddInterface(uid=uid)['add']
+        print('Avery: ', bot)
+        #user = input("user: ")
+        #dbops.upconversation_u(uid, user)
     if topic == 'rec1':
         stimereco = time.time()
         res = upgradeRecInterface.RecInterface('one',uid)

@@ -22,7 +22,7 @@ def postrec_interface(round, uid):
     with concurrent.futures.ThreadPoolExecutor() as executor:
         aftfix = ''
         if round == 'one':
-            upgradeSlotFiller.profile_editor(uid=uid)
+            #upgradeSlotFiller.profile_editor(uid=uid)
             slotFiller4pre.profile_editor(uid=uid)
             prefix = fixedSentences.prefixes["rec"]
             aftfix = fixedSentences.prefixes["aftrec1"]

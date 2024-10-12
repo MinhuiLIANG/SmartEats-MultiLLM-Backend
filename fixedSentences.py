@@ -14,4 +14,5 @@ prefixes = {
     "env": "Do you prefer to eat at a restaurant or cook at home?",
     "his": "What are your typical meals?",
     "goal": "What do you hope to achieve through a healthy diet?",
+    "add": "OK, do you have anything else to add before I recommend some food for you?",
 }
