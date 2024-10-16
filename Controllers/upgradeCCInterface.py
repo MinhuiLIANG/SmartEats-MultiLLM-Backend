@@ -16,6 +16,7 @@ from Components import upgradeSlotFiller
 from Components import addslot
 from Components import adddislikeslot
 from Components import LTMslot
+from Components import preSlotFiller
 from DAO import dbops
 
 # app = Flask(__name__)
@@ -42,26 +43,44 @@ def CCInterface():
 '''
 
 
-def CCInterface(uid):
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        # Submit the first function for execution
-        executor.submit(upgradeSlotFiller.profile_editor, uid)
-        executor.submit(addslot.preslot_interface, uid)
-        executor.submit(adddislikeslot.disslot_interface, uid)
-        executor.submit(LTMslot.LTMslot_interface, uid)
-        # Submit the second function for execution
-        chatter_interface_future = executor.submit(questionasking.chatter_interface, uid)
+def CCInterface(uid, laststage):
+    if laststage != 'chitchat':
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            # Submit the first function for execution
+            executor.submit(preSlotFiller.profile_editor, uid)
+            # Submit the second function for execution
+            chatter_interface_future = executor.submit(questionasking.chatter_interface, uid)
 
-        # Wait for both functions to complete
-        chatter_interface_result = chatter_interface_future.result()
+            # Wait for both functions to complete
+            chatter_interface_result = chatter_interface_future.result()
 
-        # Perform any necessary operations with the results
+            # Perform any necessary operations with the results
 
-        # Update the conversation in the database
-        dbops.upconversation_b(uid, chatter_interface_result)
+            # Update the conversation in the database
+            dbops.upconversation_b(uid, chatter_interface_result)
 
-        # Return the response
-        return {"chitchat": chatter_interface_result}
+            # Return the response
+            return {"chitchat": chatter_interface_result}
+    else:
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            # Submit the first function for execution
+            executor.submit(upgradeSlotFiller.profile_editor, uid)
+            executor.submit(addslot.preslot_interface, uid)
+            executor.submit(adddislikeslot.disslot_interface, uid)
+            executor.submit(LTMslot.LTMslot_interface, uid)
+            # Submit the second function for execution
+            chatter_interface_future = executor.submit(questionasking.chatter_interface, uid)
+
+            # Wait for both functions to complete
+            chatter_interface_result = chatter_interface_future.result()
+
+            # Perform any necessary operations with the results
+
+            # Update the conversation in the database
+            dbops.upconversation_b(uid, chatter_interface_result)
+
+            # Return the response
+            return {"chitchat": chatter_interface_result}
 
 # def run(MULTI_PROCESS):
 #  if MULTI_PROCESS == False:

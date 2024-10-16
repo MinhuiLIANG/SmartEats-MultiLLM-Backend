@@ -7,6 +7,7 @@ import sys
 sys.path.append("..") 
 import topicTreesm
 from Controllers import IBInterface
+from Controllers import PreCCInterface
 from Controllers import upgradeCCInterface
 from Controllers import PreferenceInterface
 from Controllers import upgradeRecInterface
@@ -36,9 +37,16 @@ def cen_api():
     if cfood != 'none':
         dbops.upaccfood(uid, cfood)
     cc_cnt = dbops.getround(uid)
+    pc_cnt = dbops.getpreround(uid)
     if topic == 'rec1':
         action = control
         print('{tp} & {ac}'.format(tp=topic,ac=action))
+    elif topic == 'prechat' and pc_cnt < 6:
+        action = '<keep>'
+    elif topic == 'prechat':
+        action = upgradeConInterface.controlInterface(uid=uid)
+        if action != '<down>':
+            action = '<down>'
     elif topic == 'chitchat' and cc_cnt > 13:
         action = '<down>'
         print('{tp} & {ac}'.format(tp=topic,ac=action))
@@ -51,16 +59,14 @@ def cen_api():
         action = upgradeConInterface.controlInterface(uid=uid)
         print('{tp} & {ac}'.format(tp=topic,ac=action))
     elif topic == 'icebreak':
-        action = upgradeConInterface.controlInterface(uid=uid)
-        if action != '<down>':
-            action = '<down>'
+        action = '<down>'
         print('{tp} & {ac}'.format(tp=topic,ac=action))
     else:
         action = '<down>'
         print('{tp} & {ac}'.format(tp=topic,ac=action))
 
     nxttopic = topicTreesm.movepter(topic, action)
-
+    dbops.uplasttopic(uid, topic)
     dbops.uptopic(uid, nxttopic)
     
     topic = dbops.gettopic(uid)
@@ -68,15 +74,29 @@ def cen_api():
     bot = 'emmmm'
     #action = '<down>'
     if topic == 'icebreak':
-        dbops.uptopic(uid, 'chitchat')
+        dbops.uptopic(uid, 'prechat')
         topic = 'chitchat'
         #bot = IBInterface.IBInterface()['icebreak']
         #print('Avery: ', bot)
         #user = input("user: ")
         #dbops.upconversation_u(uid, user)
-    if topic == 'chitchat':
+    if topic == 'prechat':
+        laststage = dbops.getlasttopic(uid)
         stime = time.time()
-        bot = upgradeCCInterface.CCInterface(uid=uid)['chitchat']
+        bot = PreCCInterface.CCInterface(uid=uid, laststage=laststage)['prechitchat']
+        etime = time.time()
+        rtime = etime - stime
+        dbops.upinfoctime(uid, rtime)
+        print('Avery: ', bot)
+        #user = input("user: ")
+        #dbops.upconversation_u(uid, user)
+        pc_cnt = dbops.getpreround(uid)
+        pc_cnt = pc_cnt + 1
+        dbops.uppreround(uid, pc_cnt)
+    if topic == 'chitchat':
+        laststage = dbops.getlasttopic(uid)
+        stime = time.time()
+        bot = upgradeCCInterface.CCInterface(uid=uid, laststage=laststage)['chitchat']
         etime = time.time()
         rtime = etime - stime
         dbops.upinfoctime(uid, rtime)
@@ -87,7 +107,11 @@ def cen_api():
         cc_cnt = cc_cnt + 1
         dbops.upround(uid, cc_cnt)
     if topic == 'add':
+        stime = time.time()
         bot = addInterface.AddInterface(uid=uid)['add']
+        etime = time.time()
+        rtime = etime - stime
+        dbops.upinfoctime(uid, rtime)
         print('Avery: ', bot)
         #user = input("user: ")
         #dbops.upconversation_u(uid, user)

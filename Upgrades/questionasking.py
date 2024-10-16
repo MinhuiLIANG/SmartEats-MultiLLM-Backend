@@ -317,6 +317,8 @@ def chatter_interface(uid):
         dic['role'] = current_speaker
         dic['content'] = current_dialogue.strip()
         dialogue_list.append(dic)
+    
+    del dialogue_list[1:8]
 
     # user = dbops.getlastusersent(uid).replace("user:","")
 

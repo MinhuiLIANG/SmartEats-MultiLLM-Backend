@@ -237,8 +237,10 @@ def addSmartEats(uid):
                 "D_env": env, "D_preference": preference, "D_budget": budget, "D_dietary culture": culture, "D_social eating": social, "D_firstaccept": accfrst, "D_secondaccept": accscnd,
                 "D_accfood": accfood}
 
+    preround = 0
     chitchatround = 0
     chathistory = ''
+    lasttopic = 'none'
     currenttopic = 'icebreak'
     preferencefood = 'none'
     image = ''
@@ -249,10 +251,11 @@ def addSmartEats(uid):
     rectime = [0]
 
     tasks = {"emotion": 0, "hunger level": 0, "time limitation": 0, "goal": 0, "env": 0, "his": 0, "preference": 0, "budget": 0, "social": 0, "culture": 0}
+    pretasks = {"gender": 0, "age": 0, "height": 0, "weight": 0, "location": 0, "restriction": 0}
     LTMslots = ''
 
-    convinit = {"D_history": chathistory, "D_currenttopic": currenttopic, "D_chitchatround": chitchatround,
-                "image": image, "preferencefood": preferencefood, "allfoods": allfoods, "D_tasks": tasks,
+    convinit = {"D_history": chathistory, "D_currenttopic": currenttopic, "D_lasttopic":lasttopic, "D_preround": preround, "D_chitchatround": chitchatround,
+                "image": image, "preferencefood": preferencefood, "allfoods": allfoods, "D_tasks": tasks, "D_pretasks": pretasks,
                 "LTMslots": LTMslots, "lasttask": lasttask, "currenttask": currenttask, "infoctime": infoctime, "rectime": rectime}
 
     acca = 'none'
@@ -434,6 +437,16 @@ def gettopic(uid):
     return topic
 
 
+def getlasttopic(uid):
+    topic = db.reference('/' + version + '/' + uid + "/conversation/D_lasttopic").get()
+    return topic
+
+
+def getpreround(uid):
+    round = db.reference('/' + version + '/' + uid + "/conversation/D_preround").get()
+    return round
+
+
 def getround(uid):
     round = db.reference('/' + version + '/' + uid + "/conversation/D_chitchatround").get()
     return round
@@ -477,6 +490,19 @@ def gettask(uid):
         random.shuffle(taskAvailable)
         return taskAvailable[0]
     if len(taskAvailable) == 0:
+        return 'finished'
+    
+    
+def getpretask(uid):
+    pretasks = db.reference('/' + version + '/' + uid + "/conversation/D_pretasks").get()
+    pretaskAvailable = []
+    for key in pretasks:
+        if pretasks[key] == 0:
+            pretaskAvailable.append(key)
+
+    if len(pretaskAvailable) != 0:
+        return pretaskAvailable[0]
+    if len(pretaskAvailable) == 0:
         return 'finished'
 
 
@@ -643,6 +669,14 @@ def upcon(uid, con):
 
 def uptopic(uid, topic):
     db.reference('/' + version + '/' + uid + "/conversation/D_currenttopic").set(topic)
+    
+    
+def uplasttopic(uid, topic):
+    db.reference('/' + version + '/' + uid + "/conversation/D_lasttopic").set(topic)
+    
+    
+def uppreround(uid, round):
+    db.reference('/' + version + '/' + uid + "/conversation/D_preround").set(round)
 
 
 def upround(uid, round):
@@ -664,6 +698,10 @@ def uppreferencefood(uid, food):
 
 def uptask(uid, task):
     db.reference('/' + version + '/' + uid + "/conversation/D_tasks/" + task).set(1)
+    
+    
+def uppretask(uid, pretask):
+    db.reference('/' + version + '/' + uid + "/conversation/D_pretasks/" + pretask).set(1)
 
 
 def upcurtask(uid, task):
