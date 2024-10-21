@@ -19,7 +19,7 @@ def chatter_interface(uid):
     restriction = dbops.getcon(uid)
 
     emo_prompt = '''
-       [topic] -> <emotion status>: asking about the user's recent emotion status.
+       [topic] -> <emotion status>: asking about the user's recent general emotion status.
        [dietary restriction] -> {restriction}
        
        I am SmartEats, a nutrition expert who is chatting with the user to understand his/her recent emotions and provide specific nutritional feedback according to the last round of conversation.
