@@ -6,9 +6,11 @@ from DAO import dbops
 
 #uid = 'asdkhasd'
 def intentdetection(uid):
-    origintask = ['emotion', 'env', 'goal', 'his', 'hunger level', 'time limitation', 'preference', 'budget', 'social', 'culture']
+    origintask = ['emotion', 'env', 'goal', 'his', 'hunger level', 'time limitation', 'preference', 'budget', 'social', 'culture', 'exercise']
     tasklst = dbops.gettasklst(uid)
     print('tasklist: ', tasklst)
+    pretasks = dbops.getprevtasks(uid)
+    print('prevtasklist: ', pretasks)
 
     conv = dbops.getwholeconversation(uid)
 
@@ -38,7 +40,8 @@ def intentdetection(uid):
       <preference>: asking about the user's food or flavor preference
       <budget>: asking about the user's budget for meals, whether it is flexible or tight
       <social>: asking about the social environment when the user has meals, whether usually eating alone or with others
-      <culture>: asking about the user's preferred cuisine type or cooking style
+      <culture>: asking about the user's food culture
+      <exercise>: asking about the user's exercise habit, whether the user often exercise or not
       
       [rest topics]-><{}>
       [last topic]-><{lasttask}>
@@ -61,7 +64,7 @@ def intentdetection(uid):
       '''.format(", ".join(tasklst), lasttask=lasttask, conversation=conversation)
     else:
       controllerprompt = '''
-      [asked topics]-><'emotion', 'env', 'goal', 'his', 'hunger level', 'time limitation', 'preference', 'budget', 'social', 'culture'>
+      [asked topics]-><'emotion', 'env', 'goal', 'his', 'hunger level', 'time limitation', 'preference', 'budget', 'social', 'culture', 'exercise'>
       
       Definition of topics:
       <emotion>: asking about the user's recent emotion status
@@ -74,6 +77,7 @@ def intentdetection(uid):
       <budget>: asking about the user's budget for meals, whether it is flexible or tight
       <social>: asking about the social environment when the user has meals, whether usually eating alone or with others
       <culture>: asking about the user's preferred cuisine type or cooking style
+      <exercise>: asking about the user's exercise habit, whether the user often exercise or not
       
       I am managing the flow of a conversation including various topics related to user's eating habits. The Definition of topics are listed above. 
       In [conversation log] below, the topics are delivered to the user by asking corresponding questions relevant to the Definition of topics above. For instance, the chabot may deliver <culture> topic by asking 'By the way, do you have a preferred cuisine type or cooking style?'
@@ -105,21 +109,47 @@ def intentdetection(uid):
     res = res.replace("<", "").replace(">", "").replace("'", "")
     
     if res in origintask:
-      if tasklst == 'finished':
-        print('module output result: ', res)
-        dbops.upcurrenttask(uid, res)
-        return res
+      if len(pretasks) >= 2 and pretasks[-2] != res:
+        if tasklst == 'finished':
+          print('module output result: ', res)
+          dbops.upcurrenttask(uid, res)
+          dbops.upprevtasklst(uid, res)
+          return res
+        else:
+          if res in avaitask:
+            print('select an available task')
+            print('module output result: ', res)
+            dbops.upcurrenttask(uid, res)
+            dbops.upprevtasklst(uid, res)
+            return res
+          else:
+            print('select an unavailable task')
+            print('module output result: ', res)
+            rantask = random.choice(tasklst)
+            dbops.upcurrenttask(uid, rantask)
+            dbops.upprevtasklst(uid, rantask)
+            return rantask
+      elif len(pretasks) >= 2 and pretasks[-2] == res:
+        if tasklst == 'finished':
+          return 'OK'
+        else:
+          randomtopic = random.choice(tasklst)
+          dbops.upcurrenttask(uid, randomtopic)
+          dbops.upprevtasklst(uid, randomtopic)
+          return randomtopic
       else:
         if res in avaitask:
           print('select an available task')
           print('module output result: ', res)
           dbops.upcurrenttask(uid, res)
+          dbops.upprevtasklst(uid, res)
           return res
         else:
           print('select an unavailable task')
           print('module output result: ', res)
           rantask = random.choice(tasklst)
           dbops.upcurrenttask(uid, rantask)
+          dbops.upprevtasklst(uid, rantask)
           return rantask
     else:
       print('mistake, output: ', res)
@@ -128,6 +158,7 @@ def intentdetection(uid):
       else:
         randomtopic = random.choice(tasklst)
         dbops.upcurrenttask(uid, randomtopic)
+        dbops.upprevtasklst(uid, randomtopic)
         return randomtopic
 
 #intentdetection('55c37e1cfdf99b3f595dc7ffemailprolificcom')

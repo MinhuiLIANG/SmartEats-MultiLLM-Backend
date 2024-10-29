@@ -47,7 +47,7 @@ def prereco_interface(uid):
         [preferred food]-><{specificpreferedfood}>
         [health concern]-><{healthconcern}>
         [budget]-><{budget}>
-        [preferred cuisine and style]-><{culture}>
+        [food culture]-><{culture}>
         [social environment of meals]-><{social}>
         
         *Task -> List five *common*, *widely eaten* and *very local* dishes eaten by people in [location] according to the information above. Do NOT list anything peculiar.  
@@ -59,7 +59,7 @@ def prereco_interface(uid):
         5. People provide [feedback] regarding [first food] and [second food], which were recommended by you previously. Make another recommendation according to this information. If the people explicitly mention in the *feedback* the specific, healthy enough food they desire, I will list that dish.
         6. The dishes can be similar to people's [diet history]. Moreover, if [social environment of meals] is 'group', you should list the dishes better fit for [diet history].
         7. If the [dining environment] is 'outside', the dishes should be standard restaurant dishes; If the dining environment is 'home', the dishes should be easy to be made at home and the ingredients should be easy to be found.
-        8. People's [preference], such as [preferred food] and [preferred cuisine and style], which must be covered with high priority if it is not 'none'. If the user explicitly mention in the *Preference* the specific, healthy enough food he/she desire, I will list that dish.
+        8. People's [preference], such as [preferred food] and [food culture], which must be covered with high priority if it is not 'none'. If the user explicitly mention in the *Preference* the specific, healthy enough food he/she desire, I will list that dish.
         9. Be careful about people's [health concern] if it is not 'none', the dishes should be safe and beneficial to it. This requirement has the highest priority.
         10. Just list the dishes and do not explain the reason.
         11. For each dish, the main food is the one that fits people's [preference] and [health concern] if they are not 'none'. You should first determine the **specific** main food. The side food is other foods to balance and enrich the dish, which should be less specific and described in general terms, such as 'seafood', 'vegetable', 'and bread'. Note that the combination of the main food and the side food must be **nutritionally balanced**, including vitamins, carbs, and protein.
@@ -83,7 +83,7 @@ def prereco_interface(uid):
         [preferred food]-><{specificpreferedfood}>
         [health concern]-><{healthconcern}>
         [budget]-><{budget}>
-        [preferred cuisine and style]-><{culture}>
+        [food culture]-><{culture}>
         [social environment of meals]-><{social}>
         
         *Task -> List five *common*, *widely eaten* and *very local* dishes eaten by people in [location] according to the information above. Do NOT list anything peculiar.  
@@ -94,7 +94,7 @@ def prereco_interface(uid):
         4. You must consider [budget] when listing dishes. The dishes you list must be on budget.
         5. The dishes can be similar to people's [diet history]. Moreover, if [social environment of meals] is 'group', you should list the dishes better fit for [diet history].
         6. If the [dining environment] is 'outside', the dishes should be standard restaurant dishes; If the dining environment is 'home', the dishes should be easy to be made at home and the ingredients should be easy to be found.
-        7. People's [preference], such as [preferred food] and [preferred cuisine and style], which must be covered with high priority if it is not 'none'. If the user explicitly mention in the *Preference* the specific, healthy enough food he/she desire, I will list that dish.
+        7. People's [preference], such as [preferred food] and [food culture], which must be covered with high priority if it is not 'none'. If the user explicitly mention in the *Preference* the specific, healthy enough food he/she desire, I will list that dish.
         8. Be careful about people's [health concern] if it is not 'none', the dishes should be safe and beneficial to it. This requirement has the highest priority.
         9. Just list the dishes and do not explain the reason.
         10. For each dish, the main food is the one that fits people's [preference] and [health concern] if they are not 'none'. You should first determine the **specific** main food. The side food is other foods to balance and enrich the dish, which should be less specific and described in general terms, such as 'seafood', 'vegetable', 'and bread'. Note that the combination of the main food and the side food must be **nutritionally balanced**, including vitamins, carbs, and protein.

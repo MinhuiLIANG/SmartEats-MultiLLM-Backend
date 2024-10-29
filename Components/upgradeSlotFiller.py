@@ -28,7 +28,8 @@ def slot_interface(uid):
     topic 7: <food preference> -> value 7: [preferred food type in User's message]
     topic 8: <budget> -> value 8: [<flexible>, <tight>]
     topic 9: <social eating> -> value 9: [<alone>, <group>]
-    topic 10: <dietary culture> value 10: [dietary culture type in User's message]
+    topic 10: <dietary culture> -> value 10: [dietary culture in User's message]
+    topic 11: <exercise> -> value 11: [<frequent>, <seldom>]
 
     The above pairs show the map of topics and values, each topic (such as <dining place>, which asks User eat at outside or home) relates to several values (such as <outside>, <home>).
     There will be a single round conversation, in which the assistant asks a question related to one of the topics shown above.
@@ -79,8 +80,8 @@ def profile_editor(uid):
   res = slot_interface(uid)
   print("********", res)
   lst = res.split(':')
-  topic_list = ['emotion', 'eating habit', 'time limitation', 'goal', 'dining place', 'eating history', 'food preference', 'budget', 'social eating', 'dietary culture']
-  value_list = ['positive', 'neutral', 'negative', 'limited', 'sufficient', 'regular', 'casual', 'outside', 'home', 'flexible', 'tight', 'alone', 'group']
+  topic_list = ['emotion', 'eating habit', 'time limitation', 'goal', 'dining place', 'eating history', 'food preference', 'budget', 'social eating', 'dietary culture', 'exercise']
+  value_list = ['positive', 'neutral', 'negative', 'limited', 'sufficient', 'regular', 'casual', 'outside', 'home', 'flexible', 'tight', 'alone', 'group', 'frequent', 'seldom']
   if len(lst)>1:
     topic = lst[0].replace('<','').replace('>','')
     value = lst[1].replace('<','').replace('>','')
@@ -97,6 +98,8 @@ def profile_editor(uid):
         dbops.upbudget(uid, value)
       if topic == 'social eating':
         dbops.upsocial(uid, value)
+      if topic == 'exercise':
+        dbops.upexercise(uid, value)
     elif topic == 'goal':
       dbops.upgoal(uid, value)
     elif topic == 'eating history':

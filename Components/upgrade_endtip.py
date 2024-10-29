@@ -21,6 +21,12 @@ def getips(uid):
     goal = dbops.getgoal(uid)
     LTMinfo = dbops.getLTM(uid)
     
+    budget = dbops.getbudget(uid)
+    culture = dbops.getculture(uid)
+    social = dbops.getsocial(uid)
+    exercise = dbops.getexercise(uid)
+    
+    
     if con == '':
         con = 'none'
         
@@ -43,6 +49,10 @@ def getips(uid):
     [recent emotion] -> {emotion}
     [time for eating] -> {timelimitation}
     [eating goal] -> {eatinggoal}
+    [budget] -> {budget}
+    [food culture] -> {culture}
+    [social environment of meals] -> {social}
+    [exercise frequency] -> {exercise}
     [additional information] -> {LTMinfo}
    
     I am a nutritionist. The above information points are the user's *Profile about health condition and diet information. I will provide *ONE SHORT* tip about healthy eating that is beneficial to the user's [health concern] and [eating goal] if it is not 'none'. The tip also need to include [additional information] if it is not 'none'.
@@ -50,7 +60,7 @@ def getips(uid):
     After providing the tip, I will extract two or three keywords from the tip and start a new line to show the keywords. The keywords need to be specific and professional, and start with 'Here are the dietary keywords for you: ' (e.g., Here are the dietary keywords for you: moderate sodium, a mix of carbs, regular exercise).
     My tip and keywords:
     '''.format(
-        location=loc, foodrestriction=confood, calorie=cal, dietarypreference=pre, specificpreferedfood=preferfood, healthconcern=health, diningenvironment=place, diethistory=his, eatinghabit=eh, emotion=emo, timelimitation=limit, eatinggoal=goal, LTMinfo=LTMinfo)
+        location=loc, foodrestriction=confood, calorie=cal, dietarypreference=pre, specificpreferedfood=preferfood, healthconcern=health, diningenvironment=place, diethistory=his, eatinghabit=eh, emotion=emo, timelimitation=limit, eatinggoal=goal, LTMinfo=LTMinfo, budget=budget, culture=culture, social=social, exercise=exercise)
 
     client = OpenAI(api_key="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")
 

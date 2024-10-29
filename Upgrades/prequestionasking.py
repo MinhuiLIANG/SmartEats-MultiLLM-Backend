@@ -7,18 +7,18 @@ from DAO import dbops
 def form_interface(uid):
     gender_prompt = '''
        [topic] -> <biological sex>: asking about the user's biological sex.
-       [options] -> <female, intersex, male>
+       [options] -> <female, male, intersex>
        
        I am SmartEats, I will first respond to the user, then ask a question corresponding to the [topic] above in a polite but clear and straightforward way and specifying the [options] above in the question.
        If the user's message is only about basic personal information without disclosing additional contexts, I will just respond short messages like 'OK I see', or even directly asking the question without responding to the user.
 
        Below are two examples of responding to the user and asking a question corresponding to the [topic] above.
        user: I am 20 years old.
-       SmartEats: I see. Could you please tell me your biological sex (i.e., 'female', 'intersex', or 'male')?
+       SmartEats: I see. Could you please tell me your biological sex (i.e., 'female', 'male', or 'intersex')?
 
        SmartEats: Ready to start?
        user: Yeah sure.
-       SmartEats: OK let's go! May I ask what your biological sex is (i.e., 'female', 'intersex', or 'male')?
+       SmartEats: OK let's go! May I ask what your biological sex is (i.e., 'female', 'male', or 'intersex')?
     '''
 
     age_prompt = '''
@@ -118,13 +118,13 @@ def form_interface(uid):
         prompt = gender_prompt
     elif pretask == 'age':
         prompt = age_prompt
-    elif pretask == 'height':
+    elif pretask == 'aheight':
         prompt = height_prompt
-    elif pretask == 'weight':
+    elif pretask == 'aweight':
         prompt = weight_prompt
     elif pretask == 'location':
         prompt = region_prompt
-    elif pretask == 'restriction':
+    elif pretask == 'drestriction':
         prompt = restriction_prompt
     else:
         prompt = chitchat_prompt

@@ -226,6 +226,7 @@ def addSmartEats(uid):
     budget = 'neutral_'
     culture = 'local style_'
     social = 'alone_'
+    exercise = 'neutral_'
     accfrst = "none"
     accscnd = "none"
     accfood = "none"
@@ -234,7 +235,7 @@ def addSmartEats(uid):
                 "S_weight": weight, "S_location": location, "S_character": character, "S_persona": persona,
                 "S_style": style, "S_health": healthconcern, "S_history": his, "D_contraindication": contraindication,
                 "D_emotion": emotion, "D_eating habit": habit, "D_time limitation": limitation, "D_goal": goal,
-                "D_env": env, "D_preference": preference, "D_budget": budget, "D_dietary culture": culture, "D_social eating": social, "D_firstaccept": accfrst, "D_secondaccept": accscnd,
+                "D_env": env, "D_preference": preference, "D_budget": budget, "D_dietary culture": culture, "D_social eating": social, "D_exercise": exercise, "D_firstaccept": accfrst, "D_secondaccept": accscnd,
                 "D_accfood": accfood}
 
     preround = 0
@@ -249,31 +250,36 @@ def addSmartEats(uid):
     lasttask = ''
     infoctime = [0]
     rectime = [0]
+    prevtasks = ['xxx']
 
-    tasks = {"emotion": 0, "hunger level": 0, "time limitation": 0, "goal": 0, "env": 0, "his": 0, "preference": 0, "budget": 0, "social": 0, "culture": 0}
-    pretasks = {"gender": 0, "age": 0, "height": 0, "weight": 0, "location": 0, "restriction": 0}
+    tasks = {"emotion": 0, "hunger level": 0, "time limitation": 0, "goal": 0, "env": 0, "his": 0, "preference": 0, "budget": 0, "social": 0, "culture": 0, "exercise": 0}
+    pretasks = {"gender": 0, "age": 0, "aheight": 0, "aweight": 0, "location": 0, "drestriction": 0}
     LTMslots = ''
 
     convinit = {"D_history": chathistory, "D_currenttopic": currenttopic, "D_lasttopic":lasttopic, "D_preround": preround, "D_chitchatround": chitchatround,
                 "image": image, "preferencefood": preferencefood, "allfoods": allfoods, "D_tasks": tasks, "D_pretasks": pretasks,
-                "LTMslots": LTMslots, "lasttask": lasttask, "currenttask": currenttask, "infoctime": infoctime, "rectime": rectime}
-
-    acca = 'none'
-    expa = 'none'
-    expb = 'none'
-    expc = 'none'
-    intera = 'none'
-    usefa = 'none'
-    usefb = 'none'
-    trusta = 'none'
-    trustb = 'none'
-    eata = 'none'
-    useia = 'none'
-    useib = 'none'
-    useic = 'none'
-    quaa = 'none'
-    ada = 'none'
-    adb = 'none'
+                "LTMslots": LTMslots, "lasttask": lasttask, "currenttask": currenttask, "prevtasks": prevtasks, "infoctime": infoctime, "rectime": rectime}
+    resNuturalness = 'none'
+    resKnowledge = 'none'
+    rQTrans = 'none'
+    qQTrans = 'none'
+    qNARecTrans = 'none'
+    recAcc = 'none'
+    recNovelo = 'none'
+    recNovelt = 'none'
+    recDiv = 'none'
+    adequacy = 'none'
+    sugQualityo = 'none'
+    sugQualityt = 'none'
+    expQualityo = 'none'
+    expQualityt = 'none'
+    imgQuality = 'none'
+    eatIntent = 'none'
+    satisfaction = 'none'
+    useinentiona = 'none'
+    useinentionb = 'none'
+    useinentionc = 'none'
+    trust = 'none'
     timeexp = 'none'
     edul = 'none'
     workf = 'none'
@@ -283,10 +289,12 @@ def addSmartEats(uid):
 
     surveytime = ''
 
-    uxinit = {"accuracya": acca, "explanationa": expa, "explanationb": expb, "explanationc": expc,
-              "interactiona": intera, "usefula": usefa, "usefulb": usefb, "trusta": trusta, "trustb": trustb,
-              'eata': eata, 'useintenta': useia, 'useintentb': useib, 'useintentc': useic, 'quality': quaa,
-              'additionala': ada, 'additionalb': adb, 'timeexp': timeexp, 'education': edul, 'work': workf,
+    uxinit = {"resNuturalness":resNuturalness,"resKnowledge":resKnowledge,"rQTrans":rQTrans,
+              "qQTrans":qQTrans,"qNARecTrans":qNARecTrans,"recAcc":recAcc,"recNovelo":recNovelo,
+              "recNovelt":recNovelt,"recDiv":recDiv,"adequacy":adequacy,"sugQualityo":sugQualityo,
+              "sugQualityt":sugQualityt,"expQualityo":expQualityo,"expQualityt":expQualityt,"imgQuality":imgQuality,
+              "eatIntent":eatIntent,"satisfaction":satisfaction,"useinentiona":useinentiona,"useinentionb":useinentionb,
+              "useinentionc":useinentionc,"trust":trust, 'timeexp': timeexp, 'education': edul, 'work': workf,
               'race': race, 'feedback': feedback, "extra": extra, "surveytime": surveytime}
 
     proid = 'none'
@@ -432,6 +440,11 @@ def getculture(uid):
     return culture
 
 
+def getexercise(uid):
+    exercise = db.reference('/' + version + '/' + uid + "/userprofile/D_exercise").get()
+    return exercise
+
+
 def gettopic(uid):
     topic = db.reference('/' + version + '/' + uid + "/conversation/D_currenttopic").get()
     return topic
@@ -501,6 +514,7 @@ def getpretask(uid):
             pretaskAvailable.append(key)
 
     if len(pretaskAvailable) != 0:
+        print(pretaskAvailable)
         return pretaskAvailable[0]
     if len(pretaskAvailable) == 0:
         return 'finished'
@@ -514,6 +528,13 @@ def getcurrenttask(uid):
 def getlasttask(uid):
     task = db.reference('/' + version + '/' + uid + "/conversation/lasttask").get()
     return task
+
+
+def getprevtasks(uid):
+    tasklst = db.reference('/' + version + '/' + uid + "/conversation/prevtasks").get()
+    if tasklst[0] == 'xxx':
+        tasklst.remove('xxx')
+    return tasklst
 
 
 def getwholeconversation(uid):
@@ -559,6 +580,121 @@ def getextra(uid):
 def getbotstyle(uid):
     style = db.reference('/' + version + '/' + uid + "/userexperience/chatbotstyle").get()
     return style
+
+'''
+    uxinit = {"resNuturalness":resNuturalness,"resKnowledge":resKnowledge,"rQTrans":rQTrans,
+              "qQTrans":qQTrans,"qNARecTrans":qNARecTrans,"recAcc":recAcc,"recNovelo":recNovelo,
+              "recNovelt":recNovelt,"recDiv":recDiv,"adequacy":adequacy,"sugQualityo":sugQualityo,
+              "sugQualityt":sugQualityt,"expQualityo":expQualityo,"expQualityt":expQualityt,"imgQuality":imgQuality,
+              "eatIntent":eatIntent,"satisfaction":satisfaction,"useinentiona":useinentiona,"useinentionb":useinentionb,
+              "useinentionc":useinentionc,"trust":trust, 'timeexp': timeexp, 'education': edul, 'work': workf,
+              'race': race, 'feedback': feedback, "extra": extra, "surveytime": surveytime}
+'''
+
+
+def getresNuturalness(uid):
+    resNuturalness = db.reference('/' + version + '/' + uid + "/userexperience/resNuturalness").get()
+    return resNuturalness
+
+
+def getresKnowledge(uid):
+    resKnowledge = db.reference('/' + version + '/' + uid + "/userexperience/resKnowledge").get()
+    return resKnowledge
+
+
+def getrQTrans(uid):
+    rQTrans = db.reference('/' + version + '/' + uid + "/userexperience/rQTrans").get()
+    return rQTrans
+
+
+def getqQTrans(uid):
+    qQTrans = db.reference('/' + version + '/' + uid + "/userexperience/qQTrans").get()
+    return qQTrans
+
+
+def getqNARecTrans(uid):
+    qNARecTrans = db.reference('/' + version + '/' + uid + "/userexperience/qNARecTrans").get()
+    return qNARecTrans
+
+
+def getrecAcc(uid):
+    recAcc = db.reference('/' + version + '/' + uid + "/userexperience/recAcc").get()
+    return recAcc
+
+
+def getrecNovelo(uid):
+    recNovelo = db.reference('/' + version + '/' + uid + "/userexperience/recNovelo").get()
+    return recNovelo
+
+
+def getrecNovelt(uid):
+    recNovelt = db.reference('/' + version + '/' + uid + "/userexperience/recNovelt").get()
+    return recNovelt
+
+
+def getrecDiv(uid):
+    recDiv = db.reference('/' + version + '/' + uid + "/userexperience/recDiv").get()
+    return recDiv
+
+
+def getadequacy(uid):
+    adequacy = db.reference('/' + version + '/' + uid + "/userexperience/adequacy").get()
+    return adequacy
+
+
+def getsugQualityo(uid):
+    sugQualityo = db.reference('/' + version + '/' + uid + "/userexperience/sugQualityo").get()
+    return sugQualityo
+
+
+def getsugQualityt(uid):
+    sugQualityt = db.reference('/' + version + '/' + uid + "/userexperience/sugQualityt").get()
+    return sugQualityt
+
+
+def getexpQualityo(uid):
+    expQualityo = db.reference('/' + version + '/' + uid + "/userexperience/expQualityo").get()
+    return expQualityo
+
+
+def getexpQualityt(uid):
+    expQualityt = db.reference('/' + version + '/' + uid + "/userexperience/expQualityt").get()
+    return expQualityt
+
+
+def getimgQuality(uid):
+    imgQuality = db.reference('/' + version + '/' + uid + "/userexperience/imgQuality").get()
+    return imgQuality
+
+
+def geteatIntent(uid):
+    eatIntent = db.reference('/' + version + '/' + uid + "/userexperience/eatIntent").get()
+    return eatIntent
+
+
+def getsatisfaction(uid):
+    satisfaction = db.reference('/' + version + '/' + uid + "/userexperience/satisfaction").get()
+    return satisfaction
+
+
+def getuseinentiona(uid):
+    useinentiona = db.reference('/' + version + '/' + uid + "/userexperience/useinentiona").get()
+    return useinentiona
+
+
+def getuseinentionb(uid):
+    useinentionb = db.reference('/' + version + '/' + uid + "/userexperience/useinentionb").get()
+    return useinentionb
+
+
+def getuseinentionc(uid):
+    useinentionc = db.reference('/' + version + '/' + uid + "/userexperience/useinentionc").get()
+    return useinentionc
+
+
+def gettrust(uid):
+    trust = db.reference('/' + version + '/' + uid + "/userexperience/trust").get()
+    return trust
 
 
 def gettimeexp(uid):
@@ -655,6 +791,10 @@ def upsocial(uid, social):
 
 def upculture(uid, culture):
     db.reference('/' + version + '/' + uid + "/userprofile/D_dietary culture").set(culture)
+    
+    
+def upexercise(uid, exercise):
+    db.reference('/' + version + '/' + uid + "/userprofile/D_exercise").set(exercise)
 
 
 def upcon(uid, con):
@@ -710,7 +850,13 @@ def upcurtask(uid, task):
 
 def upcurrenttask(uid, task):
     db.reference('/' + version + '/' + uid + "/conversation/currenttask").set(task)
-
+    
+    
+def upprevtasklst(uid, task):
+    tasklst = getprevtasks(uid)
+    tasklst.append(task)
+    db.reference('/' + version + '/' + uid + "/conversation/prevtasks").set(tasklst)
+    
 
 def upconversation(uid, botsent, usersent):
     meta = "chatbot: " + botsent + " user: " + usersent + " "
@@ -825,6 +971,90 @@ def upcusb(uid, cusb):
 
 def upcusc(uid, cusc):
     db.reference('/' + version + '/' + uid + "/userexperience/customizec").set(cusc)
+
+
+def upresNuturalness(uid, resNuturalness):
+    db.reference('/' + version + '/' + uid + "/userexperience/resNuturalness").set(resNuturalness)
+
+
+def upresKnowledge(uid, resKnowledge):
+    db.reference('/' + version + '/' + uid + "/userexperience/resKnowledge").set(resKnowledge)
+
+
+def uprQTrans(uid, rQTrans):
+    db.reference('/' + version + '/' + uid + "/userexperience/rQTrans").set(rQTrans)
+
+
+def upqQTrans(uid, qQTrans):
+    db.reference('/' + version + '/' + uid + "/userexperience/qQTrans").set(qQTrans)
+
+
+def upqNARecTrans(uid, qNARecTrans):
+    db.reference('/' + version + '/' + uid + "/userexperience/qNARecTrans").set(qNARecTrans)
+
+
+def uprecAcc(uid, recAcc):
+    db.reference('/' + version + '/' + uid + "/userexperience/recAcc").set(recAcc)
+
+
+def uprecNovelo(uid, recNovelo):
+    db.reference('/' + version + '/' + uid + "/userexperience/recNovelo").set(recNovelo)
+
+
+def uprecNovelt(uid, recNovelt):
+    db.reference('/' + version + '/' + uid + "/userexperience/recNovelt").set(recNovelt)
+
+
+def uprecDiv(uid, recDiv):
+    db.reference('/' + version + '/' + uid + "/userexperience/recDiv").set(recDiv)
+
+
+def upadequacy(uid, adequacy):
+    db.reference('/' + version + '/' + uid + "/userexperience/adequacy").set(adequacy)
+
+
+def upsugQualityo(uid, sugQualityo):
+    db.reference('/' + version + '/' + uid + "/userexperience/sugQualityo").set(sugQualityo)
+
+
+def upsugQualityt(uid, sugQualityt):
+    db.reference('/' + version + '/' + uid + "/userexperience/sugQualityt").set(sugQualityt)
+
+
+def upexpQualityo(uid, expQualityo):
+    db.reference('/' + version + '/' + uid + "/userexperience/expQualityo").set(expQualityo)
+
+
+def upexpQualityt(uid, expQualityt):
+    db.reference('/' + version + '/' + uid + "/userexperience/expQualityt").set(expQualityt)
+
+
+def upimgQuality(uid, imgQuality):
+    db.reference('/' + version + '/' + uid + "/userexperience/imgQuality").set(imgQuality)
+
+
+def upeatIntent(uid, eatIntent):
+    db.reference('/' + version + '/' + uid + "/userexperience/eatIntent").set(eatIntent)
+
+
+def upsatisfaction(uid, satisfaction):
+    db.reference('/' + version + '/' + uid + "/userexperience/satisfaction").set(satisfaction)
+
+
+def upuseinentiona(uid, useinentiona):
+    db.reference('/' + version + '/' + uid + "/userexperience/useinentiona").set(useinentiona)
+
+
+def upuseinentionb(uid, useinentionb):
+    db.reference('/' + version + '/' + uid + "/userexperience/useinentionb").set(useinentionb)
+    
+
+def upuseinentionc(uid, useinentionc):
+    db.reference('/' + version + '/' + uid + "/userexperience/useinentionc").set(useinentionc)
+
+
+def uptrust(uid, trust):
+    db.reference('/' + version + '/' + uid + "/userexperience/trust").set(trust)
 
 
 def upedu(uid, edu):
