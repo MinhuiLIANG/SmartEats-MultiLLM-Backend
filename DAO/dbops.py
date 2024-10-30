@@ -265,6 +265,7 @@ def addSmartEats(uid):
     qQTrans = 'none'
     qNARecTrans = 'none'
     recAcc = 'none'
+    recApp = 'none'
     recNovelo = 'none'
     recNovelt = 'none'
     recDiv = 'none'
@@ -290,7 +291,7 @@ def addSmartEats(uid):
     surveytime = ''
 
     uxinit = {"resNuturalness":resNuturalness,"resKnowledge":resKnowledge,"rQTrans":rQTrans,
-              "qQTrans":qQTrans,"qNARecTrans":qNARecTrans,"recAcc":recAcc,"recNovelo":recNovelo,
+              "qQTrans":qQTrans,"qNARecTrans":qNARecTrans,"recAcc":recAcc,"recApp":recApp, "recNovelo":recNovelo,
               "recNovelt":recNovelt,"recDiv":recDiv,"adequacy":adequacy,"sugQualityo":sugQualityo,
               "sugQualityt":sugQualityt,"expQualityo":expQualityo,"expQualityt":expQualityt,"imgQuality":imgQuality,
               "eatIntent":eatIntent,"satisfaction":satisfaction,"useinentiona":useinentiona,"useinentionb":useinentionb,
@@ -620,6 +621,11 @@ def getqNARecTrans(uid):
 def getrecAcc(uid):
     recAcc = db.reference('/' + version + '/' + uid + "/userexperience/recAcc").get()
     return recAcc
+
+
+def getrecApp(uid):
+    recApp = db.reference('/' + version + '/' + uid + "/userexperience/recApp").get()
+    return recApp
 
 
 def getrecNovelo(uid):
@@ -995,6 +1001,10 @@ def upqNARecTrans(uid, qNARecTrans):
 
 def uprecAcc(uid, recAcc):
     db.reference('/' + version + '/' + uid + "/userexperience/recAcc").set(recAcc)
+
+
+def uprecApp(uid, recApp):
+    db.reference('/' + version + '/' + uid + "/userexperience/recApp").set(recApp)
 
 
 def uprecNovelo(uid, recNovelo):
