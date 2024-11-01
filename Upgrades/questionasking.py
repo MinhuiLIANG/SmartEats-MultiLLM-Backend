@@ -340,8 +340,9 @@ def chatter_interface(uid):
         dic['role'] = current_speaker
         dic['content'] = current_dialogue.strip()
         dialogue_list.append(dic)
-    
-    del dialogue_list[1:8]
+
+    if len(dialogue_list) > 14:
+        del dialogue_list[3:15]
 
     # user = dbops.getlastusersent(uid).replace("user:","")
 
