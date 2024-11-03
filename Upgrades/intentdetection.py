@@ -33,7 +33,7 @@ def intentdetection(uid):
       Definition of topics:
       <emotion>: asking about the user's recent emotion status
       <env>: asking about the user's daily dining environment, eating outside or cooking at home
-      <goal>: asking about the user's dietary goal or requiring user to further elaborate health conditions
+      <goal>: asking about the user's dietary goal, if the user has any health aspects to be improved.
       <his>: asking about the user's general daily food patterns
       <hunger level>: asking about the user's eating habits, whether the user eat regularly or just eat when hungry
       <time limitation>: asking about how much time the user can spend for a meal
@@ -69,7 +69,7 @@ def intentdetection(uid):
       Definition of topics:
       <emotion>: asking about the user's recent emotion status
       <env>: asking about the user's daily dining environment, eating outside or cooking at home
-      <goal>: asking about the user's dietary goal or requiring user to further elaborate health conditions
+      <goal>: asking about the user's dietary goal, if the user has any health aspects to be improved.
       <his>: asking about the user's general daily food patterns
       <hunger level>: asking about the user's eating habits, whether the user eat regularly or just eat when hungry
       <time limitation>: asking about how much time the user can spend for a meal

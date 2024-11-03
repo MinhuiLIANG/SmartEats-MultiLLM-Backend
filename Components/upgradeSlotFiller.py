@@ -39,14 +39,14 @@ def slot_interface(uid):
     assistant: I understand how you feel. Hunger can be quite distracting. So, how much time do you have to eat right now?
     User: I have limited time for the meal.
     
-    assistant: Hi it's great to see you too! How can I assist you today? Let's talk about your eating goals or any health plans you may have.
+    assistant: Hi it's great to see you too! Are there any health aspects you want to improve, such as energy level, physical fitness, sleep quality, immunity?
     User: I think I want to lose weight.
     
     assistant: Seems you have covered high quality protein, fat, carbs, and vitamin in your daily diet. Btw, do you usually eat alone or have meals with your family or colleagues?
     User: Mostly with my family members, I need to cook for them.
     
     First, you need to judge what is the topic according to the assistant's words. In the first example, 'how much time do you have to eat right now?' indicates the topic is <time limitation>;
-    in the second example, 'Let's talk about your eating goals or any health plans you may have.' means that the assistant is asking about User's goal, so the topic is <goal>.
+    in the second example, 'Are there any health aspects you want to improve' means that the assistant is asking about User's health goal, so the topic is <goal>.
     in the third example, 'eat alone or have meals with your family or colleagues' indicates the assistant is asking about the social environment when the user have meals, so the topic is <social eating>.
     
     Second, you need to judge what value is related to the topic you just find according to the User's message. If the value is abstract, like [food type in User's message], you should extract the food information in the user's message as the value. In the first example, 'limited time for the meal' means the <time limitation> is <limited>;

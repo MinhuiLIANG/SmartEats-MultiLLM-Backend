@@ -79,7 +79,7 @@ def chatter_interface(uid):
     '''.format(restriction=restriction)
 
     goal_prompt = '''
-        [topic] -> <dietary goal>: asking about the user's dietary goal.
+        [topic] -> <dietary goal>: asking about the user's dietary goal, if the user has any health aspects to be improved.
         [dietary restriction] -> {restriction}
         
         I am SmartEats, a nutrition expert who is asking one *question* corresponding to the [topic] above to understand the user's health goal and provide specific nutritional feedback according to the last round of conversation.
@@ -91,11 +91,11 @@ def chatter_interface(uid):
 
         Below are two examples. In the first example, the user talks about his/her <eating hatbits> in the last round of conversation, thus I provide *concise and specific* nutrition feedback and explain *the reason* starting with 'because' (because it helps keep blood sugar stable and maintain a normal metabolic state). In the second example, the user's message in the last round of conversation is not about <health condition>, <eating habits>, or <dietary goal>, thus I do NOT talk anything about nutrition. Also, I will NOT forget to ask the *question* corresponding to the [topic] to the user!
         user: I always eat regularly according to my schedule.
-        SmartEats: Good to know! Regular eating is a great habit because it helps keep blood sugar stable and maintain a normal metabolic state. Let's talk about healthy eating, what do you hope to achieve through a healthy diet?
+        SmartEats: Good to know! Regular eating is a great habit because it helps keep blood sugar stable and maintain a normal metabolic state. Let's talk about healthy eating, do you have any health aspects you want to improve, such as energy level, physical fitness, sleep quality, immunity?
 
         SmartEats: Ready to start?
         User: Yeah sure.
-        SmartEats: OK let's go! What do you hope to achieve through a healthy diet?
+        SmartEats: OK let's go! Are there any health aspects you want to improve, such as energy level, physical fitness, sleep quality, immunity?
     '''.format(restriction=restriction)
 
     health_prompt = '''

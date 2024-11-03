@@ -13,7 +13,7 @@ def prereco_interface(uid):
     place = dbops.getenv(uid)
     pre = dbops.getprefer(uid)
     preferfood = dbops.getpreferencefood(uid)
-    health = dbops.getconcern(uid)
+    goal = dbops.getgoal(uid)
     his = dbops.gethistory(uid)
     lastroundfoods = dbops.getallfoods(uid)
     
@@ -23,9 +23,6 @@ def prereco_interface(uid):
     
     if con == '':
         con = 'none'
-    
-    if health == '':
-        health = 'none'
     
     prompt = ""
     if lastroundfoods != "":
@@ -45,7 +42,7 @@ def prereco_interface(uid):
         [dining environmrnt]-><{diningenvironment}>
         [preference]-><{dietarypreference}>
         [preferred food]-><{specificpreferedfood}>
-        [health concern]-><{healthconcern}>
+        [dietary goal]-><{goal}>
         [budget]-><{budget}>
         [food culture]-><{culture}>
         [social environment of meals]-><{social}>
@@ -60,17 +57,16 @@ def prereco_interface(uid):
         6. The dishes can be similar to people's [diet history]. Moreover, if [social environment of meals] is 'group', you should list the dishes better fit for [diet history].
         7. If the [dining environment] is 'outside', the dishes should be standard restaurant dishes; If the dining environment is 'home', the dishes should be easy to be made at home and the ingredients should be easy to be found.
         8. People's [preference], such as [preferred food] and [food culture], which must be covered with high priority if it is not 'none'. If the user explicitly mention in the *Preference* the specific, healthy enough food he/she desire, I will list that dish.
-        9. Be careful about people's [health concern] if it is not 'none', the dishes should be safe and beneficial to it. This requirement has the highest priority.
-        10. Just list the dishes and do not explain the reason.
-        11. For each dish, the main food is the one that fits people's [preference] and [health concern] if they are not 'none'. You should first determine the **specific** main food. The side food is other foods to balance and enrich the dish, which should be less specific and described in general terms, such as 'seafood', 'vegetable', 'and bread'. Note that the combination of the main food and the side food must be **nutritionally balanced**, including vitamins, carbs, and protein.
-        For example, in the food 'Baked salmon with sweet potato mash and avocado salsa' and the user's [health concern] is about <heart disease>, then the main food is 'Baked salmon' because the nutrition within salmon is good for heart health; the side food is 'sweet potato mash and avocado salsa', which does not warrant a specific name, you should replace it to a general term. So, the food you list should be 'Baked salmon with various veggies and sweet potatoes'.
+        9. Just list the dishes and do not explain the reason.
+        10. For each dish, the main food is the one that fits people's [preference] and [dietary goal]. You should first determine the **specific** main food. The side food is other foods to balance and enrich the dish, which should be less specific and described in general terms, such as 'seafood', 'vegetable', 'and bread'. Note that the combination of the main food and the side food must be **nutritionally balanced**, including vitamins, carbs, and protein.
+        For example, in the food 'Baked salmon with sweet potato mash and avocado salsa' and the user's [dietary goal] is about <cardiovascular function>, then the main food is 'Baked salmon' because the nutrition within salmon is good for heart health; the side food is 'sweet potato mash and avocado salsa', which does not warrant a specific name, you should replace it to a general term. So, the food you list should be 'Baked salmon with various veggies and sweet potatoes'.
         *Example->
         beef noodles with vegetables
         grilled fish and fruit salad with bread
-        List the five dishes here following the *Rules and *Example above for the user. Use your knowledge to make the five dishes very *attractive*, *diverse* and *different from each other*. You must make sure people with different [location], [dietary restrictions], [diet history], [dining environment], [preference], and [health concern] will receive different dishes. Personalization Matters!
+        List the five dishes here following the *Rules and *Example above for the user. Use your knowledge to make the five dishes very *attractive*, *diverse* and *different from each other*. You must make sure people with different [location], [dietary restrictions], [diet history], [dining environment], [preference], and [dietary goal] will receive different dishes. Personalization Matters!
         '''.format(
                 location=loc, dietaryrestriction=con, calorie=cal, dietarypreference=pre, specificpreferedfood=preferfood,
-                healthconcern=health, diningenvironment=place, diethistory=his, firstrecommendedfoodfromlastround=f1,
+                goal=goal, diningenvironment=place, diethistory=his, firstrecommendedfoodfromlastround=f1,
                 secondrecommendfoodfromlastround=f2, feedback=fb, budget=budget, culture=culture, social=social)
     else:
         prompt = '''
@@ -81,7 +77,7 @@ def prereco_interface(uid):
         [dining environmrnt]-><{diningenvironment}>
         [preference]-><{dietarypreference}>
         [preferred food]-><{specificpreferedfood}>
-        [health concern]-><{healthconcern}>
+        [dietary goal]-><{goal}>
         [budget]-><{budget}>
         [food culture]-><{culture}>
         [social environment of meals]-><{social}>
@@ -95,17 +91,16 @@ def prereco_interface(uid):
         5. The dishes can be similar to people's [diet history]. Moreover, if [social environment of meals] is 'group', you should list the dishes better fit for [diet history].
         6. If the [dining environment] is 'outside', the dishes should be standard restaurant dishes; If the dining environment is 'home', the dishes should be easy to be made at home and the ingredients should be easy to be found.
         7. People's [preference], such as [preferred food] and [food culture], which must be covered with high priority if it is not 'none'. If the user explicitly mention in the *Preference* the specific, healthy enough food he/she desire, I will list that dish.
-        8. Be careful about people's [health concern] if it is not 'none', the dishes should be safe and beneficial to it. This requirement has the highest priority.
-        9. Just list the dishes and do not explain the reason.
-        10. For each dish, the main food is the one that fits people's [preference] and [health concern] if they are not 'none'. You should first determine the **specific** main food. The side food is other foods to balance and enrich the dish, which should be less specific and described in general terms, such as 'seafood', 'vegetable', 'and bread'. Note that the combination of the main food and the side food must be **nutritionally balanced**, including vitamins, carbs, and protein.
-        For example, in the food 'Baked salmon with sweet potato mash and avocado salsa' and the user's [health concern] is about <heart disease>, then the main food is 'Baked salmon' because the nutrition within salmon is good for heart health; the side food is 'sweet potato mash and avocado salsa', which does not warrant a specific name, you should replace it to a general term. So, the food you list should be 'Baked salmon with various veggies and sweet potatoes'.
+        8. Just list the dishes and do not explain the reason.
+        9. For each dish, the main food is the one that fits people's [preference] and [dietary goal] if they are not 'none'. You should first determine the **specific** main food. The side food is other foods to balance and enrich the dish, which should be less specific and described in general terms, such as 'seafood', 'vegetable', 'and bread'. Note that the combination of the main food and the side food must be **nutritionally balanced**, including vitamins, carbs, and protein.
+        For example, in the food 'Baked salmon with sweet potato mash and avocado salsa' and the user's [dietary goal] is about <cardiovascular function>, then the main food is 'Baked salmon' because the nutrition within salmon is good for heart health; the side food is 'sweet potato mash and avocado salsa', which does not warrant a specific name, you should replace it to a general term. So, the food you list should be 'Baked salmon with various veggies and sweet potatoes'.
         *Example->
         beef noodles with vegetables
         grilled fish and fruit salad with bread
-        List the five dishes here following the *Rules and *Example above for the user. Use your knowledge to make the five dishes very *attractive*, *diverse* and *different from each other*. You must make sure people with different [location], [dietary restrictions], [diet history], [dining environment], [preference], and [health concern] will receive different dishes. Personalization Matters!
+        List the five dishes here following the *Rules and *Example above for the user. Use your knowledge to make the five dishes very *attractive*, *diverse* and *different from each other*. You must make sure people with different [location], [dietary restrictions], [diet history], [dining environment], [preference], and [dietary goal] will receive different dishes. Personalization Matters!
         '''.format(
                 location=loc, dietaryrestriction=con, calorie=cal, dietarypreference=pre, specificpreferedfood=preferfood,
-                healthconcern=health, diningenvironment=place, diethistory=his, budget=budget, culture=culture, social=social)
+                goal=goal, diningenvironment=place, diethistory=his, budget=budget, culture=culture, social=social)
 
     client = OpenAI(api_key="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")
 

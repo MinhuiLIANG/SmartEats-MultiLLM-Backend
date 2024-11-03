@@ -47,7 +47,6 @@ def postrec_interface(round, uid):
             lst = lst1res + lst2res
 
         goal = dbops.getgoal(uid)
-        health = dbops.getconcern(uid)
         emo = dbops.getemo(uid)
         eh = dbops.geteh(uid)
         limit = dbops.getlimit(uid)
@@ -55,9 +54,7 @@ def postrec_interface(round, uid):
         prefood = dbops.getpreferencefood(uid)
         LTMinfo = dbops.getLTM(uid)
         exercise = dbops.getexercise(uid)
-        
-        if health == '':
-            health = 'none'
+        con = dbops.getcon(uid)
             
         if LTMinfo == '':
             LTMinfo = 'none'
@@ -80,7 +77,7 @@ def postrec_interface(round, uid):
         [dining time limitation] -> {limitation}
         [dietary goal] -> {eatinggoal}
         [exercise frequency] -> {exercise}
-        [health concern] -> {healthconcern}
+        [dietary restriction] -> {con}
         [feedback] -> {feedback}
         [preference] -> {preferedfood}
         [additional conditions] -> {LTMinfo}
@@ -92,20 +89,19 @@ def postrec_interface(round, uid):
         2: If your [eating habit] is <causal>, I will assume you are hungry, and recommend more carb-heavy, satiating foods.
         3: If your [dining time limitation] is <sufficient>, I will recommend sumptuous cuisine; if your [time limitation] is <limited>, I will recommend very common and easy to prepared foods, such as fast foods.
         4: If your [preference] is not 'none', I will try to recommend a food similar to your [preference].
-        5: I will recommend food that is beneficial for your [dietary goal].
+        5: I will recommend food that is beneficial for your [dietary goal] and incorporate the reason into <reason>.
         6: If your [exercise frequency] is <frequent>, I will recommend a food that is beneficial for boosting and recuperating energy.
         7: I will carefully consider the [feedback] before making recommendations. If your [feedback] is not healthy, I would not adopt it and I would state this in my explanation and recommend a good healthy diet.
-        8: Same as 5, if your [health concern] is not 'none', I will carefully consider your [health concern], recommend food that is appropriate and beneficial to your [health concern], and refer to it in the subsequent explanation.
-        9: [health concern] has the highest priority, and if [dietary goal], [preference], or [feedback] conflicts with [health concern], priority is given to [health concern], with an explanation as to why.
-        10: [additional conditions] may include your resource constraints, religous belief, and special health conditions. If [additional conditions] is not 'none', I will consider these aspects when selecting food and incorporate these part of information in explanation.
-        11: I must make sure the two foods I recommend distinct from each other.
+        8: I will not recommend food conflicting to your [dietary restriction].
+        9: [additional conditions] may include your resource constraints, religous belief, and special health conditions. If [additional conditions] is not 'none', I will consider these aspects when selecting food and incorporate these part of information in explanation.
+        10: I must make sure the two foods I recommend distinct from each other.
     
         As a nutrition expert, I will recommend two foods to you by selecting one food from [food list one] as the <first dish>, and the other food from [food list two] as the <second dish> to recommend to you following *Your information and *Requirements. But I will NOT tell [food list one], [food list two] in the <reason>. At the same time, I will try to make the two dishes I select *distinct from each other* as much as possible.
-        Each recommendation of the two foods is followed by the <reason> why I recommended this to you. The <reason>, presented in plain and easy-to-understand language, will highlight the benefits of food for your health, and cover *ALL points* in *Requirements, while prioritizing the explanation of [dining time limitation], [dietary goal], [preference] also [feedback], and [health concern] if they are not 'none' or empty.
+        Each recommendation of the two foods is followed by the <reason> why I recommended this to you. The <reason>, presented in plain and easy-to-understand language, will highlight the benefits of food for your health, and cover *ALL points* in *Requirements, while prioritizing the explanation of [dining time limitation], [dietary goal], [preference] also [feedback] if they are not 'none' or empty.
     
         IMPORTANT: The food and reason are separated by '[cat]'; the two recommendations are separated by '[sep]'.
         So my output's format should be like: '<first food> [cat] <reason> [sep] <second food> [cat] <reason>'. I will remember to use [sep]!
-        '''.format(emotion=emo,eatinghabit=eh,limitation=limit,eatinggoal=goal,healthconcern=health,preferedfood=prefood,feedback=fb,LTMinfo=LTMinfo,food1=f1,food2=f2,food3=f3,food4=f4,food5=f5,food6=f6,food7=f7,food8=f8,food9=f9,food10=f10,exercise=exercise)
+        '''.format(emotion=emo,eatinghabit=eh,limitation=limit,eatinggoal=goal,con=con,preferedfood=prefood,feedback=fb,LTMinfo=LTMinfo,food1=f1,food2=f2,food3=f3,food4=f4,food5=f5,food6=f6,food7=f7,food8=f8,food9=f9,food10=f10,exercise=exercise)
 
         client = OpenAI(api_key="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")
         interface_answer = '\nMy output: '
