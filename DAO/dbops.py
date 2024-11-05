@@ -1107,6 +1107,43 @@ def uprectime(uid, time):
     timelst = db.reference('/' + version + '/' + uid + "/conversation/rectime").get()
     timelst.append(time)
     db.reference('/' + version + '/' + uid + "/conversation/rectime").set(timelst)
+    
+    
+def printchatlog(uid):
+    dialogue_string = getwholeconversation(uid)
 
+    dialogue_list = []
+    current_speaker = None
+    current_dialogue = ''
+
+    for word in dialogue_string.split():
+        if word == 'chatbot:':
+            if current_speaker is not None:
+                dic = {"role": None, "content": None}
+                dic['role'] = current_speaker
+                dic['content'] = current_dialogue.strip()
+                dialogue_list.append(dic)
+                current_dialogue = ''
+            current_speaker = 'assistant'
+        elif word == 'user:':
+            if current_speaker is not None:
+                dic = {"role": None, "content": None}
+                dic['role'] = current_speaker
+                dic['content'] = current_dialogue.strip()
+                dialogue_list.append(dic)
+                current_dialogue = ''
+            current_speaker = 'user'
+        else:
+            current_dialogue += ' ' + word
+
+    if current_speaker is not None:
+        dic = {"role": None, "content": None}
+        dic['role'] = current_speaker
+        dic['content'] = current_dialogue.strip()
+        dialogue_list.append(dic)
+        
+    print(dialogue_list)
+
+#printchatlog('mihaicfu97gmailcom')
 # lst = pulluid()
 # print(lst)

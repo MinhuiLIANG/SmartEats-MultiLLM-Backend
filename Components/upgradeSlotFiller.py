@@ -24,7 +24,7 @@ def slot_interface(uid):
     topic 3: <time limitation> -> value 3: [<limited>, <neutral>, <sufficient>]
     topic 4: <goal> -> value 4: [User's goal in the response]
     topic 5: <dining place> -> value 5: [<outside>, <home>]
-    topic 6: <eating history> -> value 6: [food type in User's message]
+    topic 6: <eating history> -> value 6: [foods in User's message]
     topic 7: <food preference> -> value 7: [preferred food type in User's message]
     topic 8: <budget> -> value 8: [<flexible>, <tight>]
     topic 9: <social eating> -> value 9: [<alone>, <group>]
@@ -35,7 +35,7 @@ def slot_interface(uid):
     There will be a single round conversation, in which the assistant asks a question related to one of the topics shown above.
     Then the User will respond. Please output the one value in values related to the topic the assistant asks according to the content of the User's response.
 
-    Here are three examples:
+    Here are four examples:
     assistant: I understand how you feel. Hunger can be quite distracting. So, how much time do you have to eat right now?
     User: I have limited time for the meal.
     
@@ -45,15 +45,20 @@ def slot_interface(uid):
     assistant: Seems you have covered high quality protein, fat, carbs, and vitamin in your daily diet. Btw, do you usually eat alone or have meals with your family or colleagues?
     User: Mostly with my family members, I need to cook for them.
     
+    assistant: Keeping good emotional status is beneficial for your overall health. Btw, what foods do you usually have in your daily lives?
+    User: Usually beef and veggie salads, and milk and nuts for snacks.
+    
     First, you need to judge what is the topic according to the assistant's words. In the first example, 'how much time do you have to eat right now?' indicates the topic is <time limitation>;
     in the second example, 'Are there any health aspects you want to improve' means that the assistant is asking about User's health goal, so the topic is <goal>.
     in the third example, 'eat alone or have meals with your family or colleagues' indicates the assistant is asking about the social environment when the user have meals, so the topic is <social eating>.
+    in the fourth example, 'what foods do you usually have in your daily lives?' indicates the assistant is asking the normally eating foods of the user, so the topic is <eating history>.
     
     Second, you need to judge what value is related to the topic you just find according to the User's message. If the value is abstract, like [food type in User's message], you should extract the food information in the user's message as the value. In the first example, 'limited time for the meal' means the <time limitation> is <limited>;
     in the second example, the value of <goal> is the user's goal in the response, so the value is <I want to lose weight.>, just extract the goal in the user's response.
     in the third example, 'Mostly with my family members' means the user eat with a group of people, so the value should be <group>.
+    in the fourth example, the foods in user's message is 'beef, veggie salads, milk, and nuts', so the value should be <beef, veggie salads, milk, and nuts>.
     
-    So your output of the first example is: <time limitation>:<limited>; for the second example, it is <goal>:<I want to lose weight.>; for the third example, it is <social eating>:<group>.
+    So your output of the first example is: <time limitation>:<limited>; for the second example, it is <goal>:<I want to lose weight.>; for the third example, it is <social eating>:<group>; for the fourth example, it is <eating history>:<beef, veggie salads, milk, and nuts>.
     Now try this conversation:\n
     '''
   
