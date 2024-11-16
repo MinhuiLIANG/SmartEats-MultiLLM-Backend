@@ -16,9 +16,6 @@ def endsmapi():
 
     resNuturalness = user_request.get("resNuturalness")
     resKnowledge = user_request.get("resKnowledge")
-    rQTrans = user_request.get("rQTrans")
-    qQTrans = user_request.get("qQTrans")
-    qNARecTrans = user_request.get("qNARecTrans")
     recAcc = user_request.get("recAcc")
     recNovelo = user_request.get("recNovelo")
     recNovelt = user_request.get("recNovelt")
@@ -48,9 +45,6 @@ def endsmapi():
 
     dbops.upresNuturalness(uid, resNuturalness)
     dbops.upresKnowledge(uid, resKnowledge)
-    dbops.uprQTrans(uid, rQTrans)
-    dbops.upqQTrans(uid, qQTrans)
-    dbops.upqNARecTrans(uid, qNARecTrans)
     dbops.uprecAcc(uid, recAcc)
     dbops.uprecNovelo(uid, recNovelo)
     dbops.uprecNovelt(uid, recNovelt)

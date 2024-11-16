@@ -52,6 +52,7 @@ def postrec_interface(round, uid):
         limit = dbops.getlimit(uid)
         fb = dbops.getlastusersent(uid).replace("user:", "")
         prefood = dbops.getpreferencefood(uid)
+        preflavor = dbops.getflavorpreference(uid)
         LTMinfo = dbops.getLTM(uid)
         exercise = dbops.getexercise(uid)
         con = dbops.getcon(uid)
@@ -79,7 +80,8 @@ def postrec_interface(round, uid):
         [exercise frequency] -> {exercise}
         [dietary restriction] -> {con}
         [feedback] -> {feedback}
-        [preference] -> {preferedfood}
+        [food preference] -> {preferedfood}
+        [flavor preference] -> {preflavor}
         [additional conditions] -> {LTMinfo}
         [food list one] -> {food1},{food2},{food3},{food4},{food5}
         [food list two] -> {food6},{food7},{food8},{food9},{food10}
@@ -88,7 +90,7 @@ def postrec_interface(round, uid):
         1: If your [emotion status] is <negative>, I will recommend comfort food, with a warm, soft, sweet taste.
         2: If your [eating habit] is <causal>, I will assume you are hungry, and recommend more carb-heavy, satiating foods.
         3: If your [dining time limitation] is <sufficient>, I will recommend sumptuous cuisine; if your [time limitation] is <limited>, I will recommend very common and easy to prepared foods, such as fast foods.
-        4: If your [preference] is not 'none', I will try to recommend a food similar to your [preference].
+        4: If your [food preference] and [flavor preference] are not 'none', I will try to recommend a food according to your [preference].
         5: I will recommend food that is beneficial for your [dietary goal] and incorporate the reason into <reason>.
         6: If your [exercise frequency] is <frequent>, I will recommend a food that is beneficial for boosting and recuperating energy.
         7: I will carefully consider the [feedback] before making recommendations. If your [feedback] is not healthy, I would not adopt it and I would state this in my explanation and recommend a good healthy diet.
@@ -101,7 +103,7 @@ def postrec_interface(round, uid):
     
         IMPORTANT: The food and reason are separated by '[cat]'; the two recommendations are separated by '[sep]'.
         So my output's format should be like: '<first food> [cat] <reason> [sep] <second food> [cat] <reason>'. I will remember to use [sep]!
-        '''.format(emotion=emo,eatinghabit=eh,limitation=limit,eatinggoal=goal,con=con,preferedfood=prefood,feedback=fb,LTMinfo=LTMinfo,food1=f1,food2=f2,food3=f3,food4=f4,food5=f5,food6=f6,food7=f7,food8=f8,food9=f9,food10=f10,exercise=exercise)
+        '''.format(emotion=emo,eatinghabit=eh,limitation=limit,eatinggoal=goal,con=con,preferedfood=prefood,preflavor=preflavor,feedback=fb,LTMinfo=LTMinfo,food1=f1,food2=f2,food3=f3,food4=f4,food5=f5,food6=f6,food7=f7,food8=f8,food9=f9,food10=f10,exercise=exercise)
 
         client = OpenAI(api_key="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")
         interface_answer = '\nMy output: '

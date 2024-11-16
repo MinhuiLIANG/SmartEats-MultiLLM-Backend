@@ -244,6 +244,7 @@ def addSmartEats(uid):
     lasttopic = 'none'
     currenttopic = 'icebreak'
     preferencefood = 'none'
+    preferenceflavor = 'none'
     image = ''
     allfoods = ''
     currenttask = ''
@@ -257,7 +258,7 @@ def addSmartEats(uid):
     LTMslots = ''
 
     convinit = {"D_history": chathistory, "D_currenttopic": currenttopic, "D_lasttopic":lasttopic, "D_preround": preround, "D_chitchatround": chitchatround,
-                "image": image, "preferencefood": preferencefood, "allfoods": allfoods, "D_tasks": tasks, "D_pretasks": pretasks,
+                "image": image, "preferencefood": preferencefood, "preferenceflavor": preferenceflavor, "allfoods": allfoods, "D_tasks": tasks, "D_pretasks": pretasks,
                 "LTMslots": LTMslots, "lasttask": lasttask, "currenttask": currenttask, "prevtasks": prevtasks, "infoctime": infoctime, "rectime": rectime}
     resNuturalness = 'none'
     resKnowledge = 'none'
@@ -478,6 +479,11 @@ def getallfoods(uid):
 def getpreferencefood(uid):
     food = db.reference('/' + version + '/' + uid + "/conversation/preferencefood").get()
     return food
+
+
+def getflavorpreference(uid):
+    flavor = db.reference('/' + version + '/' + uid + "/conversation/preferenceflavor").get()
+    return flavor
 
 
 def gettasklst(uid):
@@ -701,6 +707,7 @@ def gettimeexp(uid):
     timeexp = db.reference('/' + version + '/' + uid + "/userexperience/timeexp").get()
     return timeexp
 
+
 def getinfoctime(uid):
     time = db.reference('/' + version + '/' + uid + "/conversation/infoctime").get()
     avtime = sum(time) / (len(time) - 1)
@@ -834,6 +841,10 @@ def upallfoods(uid, food):
 
 def uppreferencefood(uid, food):
     db.reference('/' + version + '/' + uid + "/conversation/preferencefood").set(food)
+    
+    
+def upflavorpreference(uid, flavor):
+    db.reference('/' + version + '/' + uid + "/conversation/preferenceflavor").set(flavor)
 
 
 def uptask(uid, task):

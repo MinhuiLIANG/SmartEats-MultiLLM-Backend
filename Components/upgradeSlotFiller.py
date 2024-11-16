@@ -23,7 +23,7 @@ def slot_interface(uid):
     topic 2: <eating habit> -> values 2: [<regular>, <casual>]
     topic 3: <time limitation> -> value 3: [<limited>, <neutral>, <sufficient>]
     topic 4: <goal> -> value 4: [User's goal in the response]
-    topic 5: <dining place> -> value 5: [<outside>, <home>]
+    topic 5: <dining place> -> value 5: [<outside>, <mixture>, <home>]
     topic 6: <eating history> -> value 6: [foods in User's message]
     topic 7: <food preference> -> value 7: [preferred food type in User's message]
     topic 8: <budget> -> value 8: [<flexible>, <tight>]
@@ -86,7 +86,7 @@ def profile_editor(uid):
   print("********", res)
   lst = res.split(':')
   topic_list = ['emotion', 'eating habit', 'time limitation', 'goal', 'dining place', 'eating history', 'food preference', 'budget', 'social eating', 'dietary culture', 'exercise']
-  value_list = ['positive', 'neutral', 'negative', 'limited', 'sufficient', 'regular', 'casual', 'outside', 'home', 'flexible', 'tight', 'alone', 'group', 'frequent', 'seldom']
+  value_list = ['positive', 'neutral', 'negative', 'limited', 'sufficient', 'regular', 'casual', 'outside', 'mixture', 'home', 'flexible', 'tight', 'alone', 'group', 'frequent', 'seldom']
   if len(lst)>1:
     topic = lst[0].replace('<','').replace('>','')
     value = lst[1].replace('<','').replace('>','')
@@ -110,7 +110,7 @@ def profile_editor(uid):
     elif topic == 'eating history':
       dbops.uphistory(uid, value)
     elif topic == 'food preference':
-      dbops.upprefer(uid, value)
+      dbops.upflavorpreference(uid, value)
     elif topic == 'dietary culture':
       dbops.upculture(uid, value)
   
