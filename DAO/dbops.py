@@ -262,9 +262,6 @@ def addSmartEats(uid):
                 "LTMslots": LTMslots, "lasttask": lasttask, "currenttask": currenttask, "prevtasks": prevtasks, "infoctime": infoctime, "rectime": rectime}
     resNuturalness = 'none'
     resKnowledge = 'none'
-    rQTrans = 'none'
-    qQTrans = 'none'
-    qNARecTrans = 'none'
     recAcc = 'none'
     recNovelo = 'none'
     recNovelt = 'none'
@@ -291,8 +288,7 @@ def addSmartEats(uid):
 
     surveytime = ''
 
-    uxinit = {"resNuturalness":resNuturalness,"resKnowledge":resKnowledge,"rQTrans":rQTrans,
-              "qQTrans":qQTrans,"qNARecTrans":qNARecTrans,"recAcc":recAcc,"recNovelo":recNovelo,
+    uxinit = {"resNuturalness":resNuturalness,"resKnowledge":resKnowledge,"recAcc":recAcc,"recNovelo":recNovelo,
               "recNovelt":recNovelt,"recDiv":recDiv,"adequacy":adequacy,"sugQualityo":sugQualityo,
               "sugQualityt":sugQualityt,"expQualityo":expQualityo,"expQualityt":expQualityt,"imgQuality":imgQuality,
               "eatIntent":eatIntent,"satisfactiono":satisfactiono,"satisfactiont":satisfactiont,"useinentiona":useinentiona,"useinentionb":useinentionb,
@@ -607,21 +603,6 @@ def getresNuturalness(uid):
 def getresKnowledge(uid):
     resKnowledge = db.reference('/' + version + '/' + uid + "/userexperience/resKnowledge").get()
     return resKnowledge
-
-
-def getrQTrans(uid):
-    rQTrans = db.reference('/' + version + '/' + uid + "/userexperience/rQTrans").get()
-    return rQTrans
-
-
-def getqQTrans(uid):
-    qQTrans = db.reference('/' + version + '/' + uid + "/userexperience/qQTrans").get()
-    return qQTrans
-
-
-def getqNARecTrans(uid):
-    qNARecTrans = db.reference('/' + version + '/' + uid + "/userexperience/qNARecTrans").get()
-    return qNARecTrans
 
 
 def getrecAcc(uid):
@@ -996,18 +977,6 @@ def upresNuturalness(uid, resNuturalness):
 
 def upresKnowledge(uid, resKnowledge):
     db.reference('/' + version + '/' + uid + "/userexperience/resKnowledge").set(resKnowledge)
-
-
-def uprQTrans(uid, rQTrans):
-    db.reference('/' + version + '/' + uid + "/userexperience/rQTrans").set(rQTrans)
-
-
-def upqQTrans(uid, qQTrans):
-    db.reference('/' + version + '/' + uid + "/userexperience/qQTrans").set(qQTrans)
-
-
-def upqNARecTrans(uid, qNARecTrans):
-    db.reference('/' + version + '/' + uid + "/userexperience/qNARecTrans").set(qNARecTrans)
 
 
 def uprecAcc(uid, recAcc):
