@@ -276,7 +276,8 @@ def addSmartEats(uid):
     expQualityt = 'none'
     imgQuality = 'none'
     eatIntent = 'none'
-    satisfaction = 'none'
+    satisfactiono = 'none'
+    satisfactiont = 'none'
     useinentiona = 'none'
     useinentionb = 'none'
     useinentionc = 'none'
@@ -294,7 +295,7 @@ def addSmartEats(uid):
               "qQTrans":qQTrans,"qNARecTrans":qNARecTrans,"recAcc":recAcc,"recNovelo":recNovelo,
               "recNovelt":recNovelt,"recDiv":recDiv,"adequacy":adequacy,"sugQualityo":sugQualityo,
               "sugQualityt":sugQualityt,"expQualityo":expQualityo,"expQualityt":expQualityt,"imgQuality":imgQuality,
-              "eatIntent":eatIntent,"satisfaction":satisfaction,"useinentiona":useinentiona,"useinentionb":useinentionb,
+              "eatIntent":eatIntent,"satisfactiono":satisfactiono,"satisfactiont":satisfactiont,"useinentiona":useinentiona,"useinentionb":useinentionb,
               "useinentionc":useinentionc,"trust":trust, 'timeexp': timeexp, 'education': edul, 'work': workf,
               'race': race, 'feedback': feedback, "extra": extra, "surveytime": surveytime}
 
@@ -678,8 +679,13 @@ def geteatIntent(uid):
     return eatIntent
 
 
-def getsatisfaction(uid):
-    satisfaction = db.reference('/' + version + '/' + uid + "/userexperience/satisfaction").get()
+def getsatisfactiono(uid):
+    satisfaction = db.reference('/' + version + '/' + uid + "/userexperience/satisfactiono").get()
+    return satisfaction
+
+
+def getsatisfactiont(uid):
+    satisfaction = db.reference('/' + version + '/' + uid + "/userexperience/satisfactiont").get()
     return satisfaction
 
 
@@ -1048,8 +1054,12 @@ def upeatIntent(uid, eatIntent):
     db.reference('/' + version + '/' + uid + "/userexperience/eatIntent").set(eatIntent)
 
 
-def upsatisfaction(uid, satisfaction):
-    db.reference('/' + version + '/' + uid + "/userexperience/satisfaction").set(satisfaction)
+def upsatisfactiono(uid, satisfaction):
+    db.reference('/' + version + '/' + uid + "/userexperience/satisfactiono").set(satisfaction)
+    
+    
+def upsatisfactiont(uid, satisfaction):
+    db.reference('/' + version + '/' + uid + "/userexperience/satisfactiont").set(satisfaction)
 
 
 def upuseinentiona(uid, useinentiona):
