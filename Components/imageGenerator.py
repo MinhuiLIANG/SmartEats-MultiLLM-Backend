@@ -10,7 +10,7 @@ def imageGenerate(food):
     client = OpenAI(api_key="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")
     # foods = entityExtractor.extractor_interface(passage=passage)
     prompt = '''
-    Generate one image according to the following *food description* below. The image must be highly realistic, and should not resemble artwork in any way. The colors should be balanced, and the saturation should be natural. Please use a natural background, such as a luminous kitchen or a dining table, instead of a whiteboard.
+    Generate one image according to the following *food description* below. The image must be complete without any empty spaces. The image must be highly realistic, and should not resemble artwork in any way. The colors should be balanced, and the saturation should be natural. Use a natural background, such as a luminous kitchen or a dining table, instead of a whiteboard.
     *food description*: {food}
     '''.format(food=food)
 

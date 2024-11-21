@@ -13,6 +13,7 @@ def prereco_interface(uid):
     place = dbops.getenv(uid)
     pre = dbops.getprefer(uid)
     preferfood = dbops.getpreferencefood(uid)
+    preferflavor = dbops.getflavorpreference(uid)
     goal = dbops.getgoal(uid)
     his = dbops.gethistory(uid)
     lastroundfoods = dbops.getallfoods(uid)
@@ -42,31 +43,33 @@ def prereco_interface(uid):
         [dining environmrnt]-><{diningenvironment}>
         [preference]-><{dietarypreference}>
         [preferred food]-><{specificpreferedfood}>
+        [preferred flavor]-><{preferflavor}>
         [dietary goal]-><{goal}>
         [budget]-><{budget}>
         [food culture]-><{culture}>
         [social environment of meals]-><{social}>
         
-        *Task -> List five *common*, *widely eaten* and *very local* dishes eaten by people in [location] according to the information above. Do NOT list anything peculiar.  
+        *Task -> List five *common*, *widely eaten* and *very local* dishes eaten by people in [location] according to the information above. DO NOT list anything peculiar.  
         *Rules ->
         1. Each dish you list must be a combination of two components: one main food and one side food, they must be *nutritionally balanced* and *varied*, including vitamins, carbs, and protein.
         2. Each dish needs to be below [calorie restriction].
-        3. You must consider [dietary restriction] in your listed dishes if the it is not 'none'.
-        4. You must consider [budget] when listing dishes. The dishes you list must be on budget.
-        5. People provide [feedback] regarding [first food] and [second food], which were recommended by you previously. Make another recommendation according to this information. If the people explicitly mention in the *feedback* the specific, healthy enough food they desire, I will list that dish.
-        6. The dishes can be similar to people's [diet history]. Moreover, if [social environment of meals] is 'group', you should list the dishes better fit for [diet history].
-        7. If the [dining environment] is 'outside', the dishes should be standard restaurant dishes; If the dining environment is 'home', the dishes should be easy to be made at home and the ingredients should be easy to be found.
-        8. People's [preference], such as [preferred food] and [food culture], which must be covered with high priority if it is not 'none'. If the user explicitly mention in the *Preference* the specific, healthy enough food he/she desire, I will list that dish.
-        9. Just list the dishes and do not explain the reason.
-        10. For each dish, the main food is the one that fits people's [preference] and [dietary goal]. You should first determine the **specific** main food. The side food is other foods to balance and enrich the dish, which should be less specific and described in general terms, such as 'seafood', 'vegetable', 'and bread'. Note that the combination of the main food and the side food must be **nutritionally balanced**, including vitamins, carbs, and protein.
-        For example, in the food 'Baked salmon with sweet potato mash and avocado salsa' and the user's [dietary goal] is about <cardiovascular function>, then the main food is 'Baked salmon' because the nutrition within salmon is good for heart health; the side food is 'sweet potato mash and avocado salsa', which does not warrant a specific name, you should replace it to a general term. So, the food you list should be 'Baked salmon with various veggies and sweet potatoes'.
+        3. You must consider [dietary restriction] in your listed dishes if the it is not 'no' or 'none'.
+        4. You should consider [budget] when listing dishes. The dishes you list must be on budget.
+        5. People provide [feedback] regarding [first food] and [second food], which were previously recommended by you. Make another recommendation according to this information. If the people explicitly mention specific, healthy enough foods they desire in the *feedback*, I will list dishes containing the foods.
+        6. You should consider [food culture] when listing dishes.
+        7. The dishes can be similar to people's [diet history]. Moreover, if [social environment of meals] is 'group', you should list the dishes better fit for [diet history].
+        8. If the [dining environment] is 'outside', the dishes should be dishes commonly found in restaurants; If the [dining environment] is 'home', the dishes should be easy for cooking at home and the ingredients should be easy to be found in [location].
+        9. People's [preference], [preferred food] and [preferred flavor] must be covered with high priority if it is not 'none' or 'no'. If the user explicitly mention specific, healthy enough foods he/she desire, I will try to cover the foods in the listed dishes.
+        10. Just list the dishes and do not explain the reason.
+        11. For each dish, the main food fits people's [preference], [preferred food], [preferred flavor] and [dietary goal]. You should first determine the main food which must be *specific*. The side food is to balance and enrich the dish, which should be less specific and described in general terms, such as 'seafood', 'vegetable', 'and bread'. Note that the combination of the main food and the side food must be *nutritionally balanced*, including vitamins, carbs, and protein.
+        For example, in the food 'Baked salmon with sweet potato mash and avocado salsa' and the user's [dietary goal] is about <cardiovascular function>, then the main food is 'Baked salmon' because the nutrition within salmon is good for heart health; the side food is 'sweet potato mash and avocado salsa', which does not warrant a specific name, you should replace it to a general term. So, the dish you list should be 'Baked salmon with various veggies and sweet potatoes'.
         *Example->
         beef noodles with vegetables
         grilled fish and fruit salad with bread
         List the five dishes here following the *Rules and *Example above for the user. Use your knowledge to make the five dishes very *attractive*, *diverse* and *different from each other*. You must make sure people with different [location], [dietary restrictions], [diet history], [dining environment], [preference], and [dietary goal] will receive different dishes. Personalization Matters!
         '''.format(
                 location=loc, dietaryrestriction=con, calorie=cal, dietarypreference=pre, specificpreferedfood=preferfood,
-                goal=goal, diningenvironment=place, diethistory=his, firstrecommendedfoodfromlastround=f1,
+                preferflavor = preferflavor, goal=goal, diningenvironment=place, diethistory=his, firstrecommendedfoodfromlastround=f1,
                 secondrecommendfoodfromlastround=f2, feedback=fb, budget=budget, culture=culture, social=social)
     else:
         prompt = '''
@@ -77,29 +80,31 @@ def prereco_interface(uid):
         [dining environmrnt]-><{diningenvironment}>
         [preference]-><{dietarypreference}>
         [preferred food]-><{specificpreferedfood}>
+        [preferred flavor]-><{preferflavor}>
         [dietary goal]-><{goal}>
         [budget]-><{budget}>
         [food culture]-><{culture}>
         [social environment of meals]-><{social}>
         
-        *Task -> List five *common*, *widely eaten* and *very local* dishes eaten by people in [location] according to the information above. Do NOT list anything peculiar.  
+        *Task -> List five *common*, *widely eaten* and *very local* dishes eaten by people in [location] according to the information above. DO NOT list anything peculiar.  
         *Rules ->
         1. Each dish you list must be a combination of two components: one main food and one side food, they must be *nutritionally balanced* and *varied*, including vitamins, carbs, and protein.
         2. Each dish needs to be below [calorie restriction].
-        3. You must consider [dietary restriction] in your listed dishes if the it is not 'none'.
-        4. You must consider [budget] when listing dishes. The dishes you list must be on budget.
-        5. The dishes can be similar to people's [diet history]. Moreover, if [social environment of meals] is 'group', you should list the dishes better fit for [diet history].
-        6. If the [dining environment] is 'outside', the dishes should be standard restaurant dishes; If the dining environment is 'home', the dishes should be easy to be made at home and the ingredients should be easy to be found.
-        7. People's [preference], such as [preferred food] and [food culture], which must be covered with high priority if it is not 'none'. If the user explicitly mention in the *Preference* the specific, healthy enough food he/she desire, I will list that dish.
-        8. Just list the dishes and do not explain the reason.
-        9. For each dish, the main food is the one that fits people's [preference] and [dietary goal] if they are not 'none'. You should first determine the **specific** main food. The side food is other foods to balance and enrich the dish, which should be less specific and described in general terms, such as 'seafood', 'vegetable', 'and bread'. Note that the combination of the main food and the side food must be **nutritionally balanced**, including vitamins, carbs, and protein.
+        3. You must consider [dietary restriction] in your listed dishes if the it is not 'no' or 'none'.
+        4. You should consider [budget] when listing dishes. The dishes you list must be on budget.
+        5. You should consider [food culture] when listing dishes.
+        6. The dishes can be similar to people's [diet history]. Moreover, if [social environment of meals] is 'group', you should list the dishes better fit for [diet history].
+        7. If the [dining environment] is 'outside', the dishes should be dishes commonly found in restaurants; If the [dining environment] is 'home', the dishes should be easy for cooking at home and the ingredients should be easy to be found in [location].
+        8. People's [preference], [preferred food] and [preferred flavor] must be covered with high priority if it is not 'none' or 'no'. If the user explicitly mention specific, healthy enough foods he/she desire, I will try to cover the foods in the listed dishes.
+        9. Just list the dishes and do not explain the reason.
+        10. For each dish, the main food fits people's [preference], [preferred food], [preferred flavor] and and [dietary goal] if they are not 'none'. You should first determine the main food which must be *specific*. The side food is to balance and enrich the dish, which should be less specific and described in general terms, such as 'seafood', 'vegetable', 'and bread'. Note that the combination of the main food and the side food must be *nutritionally balanced*, including vitamins, carbs, and protein.
         For example, in the food 'Baked salmon with sweet potato mash and avocado salsa' and the user's [dietary goal] is about <cardiovascular function>, then the main food is 'Baked salmon' because the nutrition within salmon is good for heart health; the side food is 'sweet potato mash and avocado salsa', which does not warrant a specific name, you should replace it to a general term. So, the food you list should be 'Baked salmon with various veggies and sweet potatoes'.
         *Example->
         beef noodles with vegetables
         grilled fish and fruit salad with bread
         List the five dishes here following the *Rules and *Example above for the user. Use your knowledge to make the five dishes very *attractive*, *diverse* and *different from each other*. You must make sure people with different [location], [dietary restrictions], [diet history], [dining environment], [preference], and [dietary goal] will receive different dishes. Personalization Matters!
         '''.format(
-                location=loc, dietaryrestriction=con, calorie=cal, dietarypreference=pre, specificpreferedfood=preferfood,
+                location=loc, dietaryrestriction=con, calorie=cal, dietarypreference=pre, specificpreferedfood=preferfood, preferflavor = preferflavor,
                 goal=goal, diningenvironment=place, diethistory=his, budget=budget, culture=culture, social=social)
 
     client = OpenAI(api_key="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")

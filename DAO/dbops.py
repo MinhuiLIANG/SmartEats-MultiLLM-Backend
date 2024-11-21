@@ -37,7 +37,7 @@ def adduser(uid):
     habit = 'regular_'
     limitation = 'neutral_'
     goal = 'keep healthy_'
-    preference = 'delicous healthy food'
+    preference = 'delicious healthy food'
     env = 'home_'
     his = 'delicious local foods_'
     accfrst = "none"
@@ -209,18 +209,18 @@ def addSmartEats(uid):
     age = 30
     height = 180
     weight = 75
-    location = "Hong Kong"
+    location = "UK_"
     persona = fixper
     style = fixstyle
     character = "none"
-    contraindication = "none"
+    contraindication = "none_"
     healthconcern = "none"
     # default settings
     emotion = 'neutral_'
     habit = 'regular_'
     limitation = 'neutral_'
     goal = 'keep healthy_'
-    preference = 'delicous healthy food'
+    preference = 'delicous healthy food_'
     env = 'home_'
     his = 'delicious local foods_'
     budget = 'neutral_'
@@ -243,8 +243,8 @@ def addSmartEats(uid):
     chathistory = ''
     lasttopic = 'none'
     currenttopic = 'icebreak'
-    preferencefood = 'none'
-    preferenceflavor = 'none'
+    preferencefood = 'none_'
+    preferenceflavor = 'none_'
     image = ''
     allfoods = ''
     currenttask = ''
