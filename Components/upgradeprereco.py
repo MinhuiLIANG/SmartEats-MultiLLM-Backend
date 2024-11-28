@@ -51,7 +51,7 @@ def prereco_interface(uid):
         
         *Task -> List five *common*, *widely eaten* and *very local* dishes eaten by people in [location] according to the information above. DO NOT list anything peculiar.  
         *Rules ->
-        1. Each dish you list must be a combination of two components: one main food and one side food, they must be *nutritionally balanced* and *varied*, including vitamins, carbs, and protein.
+        1. Each dish you list must be a combination of two components: one main food and one side food, they MUST be *nutritionally balanced* and *varied*, including *carbs*, *vitamins*, and *protein*.
         2. Each dish needs to be below [calorie restriction].
         3. You must consider [dietary restriction] in your listed dishes if the it is not 'no' or 'none'.
         4. You should consider [budget] when listing dishes. The dishes you list must be on budget.
@@ -88,7 +88,7 @@ def prereco_interface(uid):
         
         *Task -> List five *common*, *widely eaten* and *very local* dishes eaten by people in [location] according to the information above. DO NOT list anything peculiar.  
         *Rules ->
-        1. Each dish you list must be a combination of two components: one main food and one side food, they must be *nutritionally balanced* and *varied*, including vitamins, carbs, and protein.
+        1. Each dish you list must be a combination of two components: one main food and one side food, they MUST be *nutritionally balanced* and *varied*, including *carbs*, *vitamins*, and *protein*.
         2. Each dish needs to be below [calorie restriction].
         3. You must consider [dietary restriction] in your listed dishes if the it is not 'no' or 'none'.
         4. You should consider [budget] when listing dishes. The dishes you list must be on budget.

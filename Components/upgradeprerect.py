@@ -40,7 +40,7 @@ def prerect_interface(uid):
         
         *Task -> List five *non-traditional* and *trending* dishes that are very *popular* and widely eaten by people in [location] according to the information above. The dishes can be other cuisines in [location]. DO NOT recommend anything peculiar.
         *Rules ->
-        1. Each dish you list must be a combination of two foods: one main food and one side food, they must be *nutritionally balanced and varied*, including vitamins, carbs, and protein.
+        1. Each dish you list must be a combination of two components: one main food and one side food, they MUST be *nutritionally balanced* and *varied*, including *carbs*, *vitamins*, and *protein*.
         2. Each dish needs to be below [calorie restriction].
         3. You must consider [dietary restriction] in your listed dishes if the it is not 'none'.
         4. You should consider [budget] when listing dishes. The dishes you list must be on budget.
@@ -66,7 +66,7 @@ def prerect_interface(uid):
         
         *Task -> List five *non-traditional* and *trending* cuisines that are very *popular* and widely eaten by people in [location] according to the information above. DO NOT recommend anything peculiar.
         *Rules ->
-        1. Each dish you list must be a combination of two foods: one main food and one side food, they must be *nutritionally balanced and varied*, including vitamins, carbs, and protein.
+        1. Each dish you list must be a combination of two components: one main food and one side food, they MUST be *nutritionally balanced* and *varied*, including *carbs*, *vitamins*, and *protein*.
         2. Each dish needs to be below [calorie restriction].
         3. You must consider [dietary restriction] in your listed dishes if the it is not 'none'.
         4. You should consider [budget] when listing dishes. The dishes you list must be on budget.
