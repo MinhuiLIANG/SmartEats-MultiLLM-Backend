@@ -1,6 +1,8 @@
 ## Backend of SmartEats based on Multi-LLM workflow [cui-25-short paper]
 This repo includes the backend of a conversational dietary recommender system powered by a multi-LLM workflow. The workflow is pre-defined. The workflow looks like this:
 
+![image](MainFigure.png) 
+
 **🍱 The entrance of this project is /Central/apifilesm.py**
 
 **🍝 The project structure is described as follows:**
