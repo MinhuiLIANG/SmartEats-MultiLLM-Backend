@@ -1,4 +1,4 @@
-## Backend of SmartEats based on Multi-LLM workflow [cui-25-short paper]
+## Backend of SmartEats based on Multi-LLM workflow [📎[cui-25-short paper](https://yuhanlolo.github.io/me/papers/cui25-multi-llm-liang.pdf)]
 This repo includes the backend of a conversational dietary recommender system powered by a multi-LLM workflow. The workflow is pre-defined (see the figure below).
 
 ![image](MainFigure.png) 
