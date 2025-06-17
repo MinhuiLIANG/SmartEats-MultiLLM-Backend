@@ -3,17 +3,17 @@ This repo includes the backend of a conversational dietary recommender system po
 
 ![image](MainFigure.png) 
 
-**🍱 The entrance of this project is /Central/apifilesm.py**
+**🍱 The entrance of this project is `/Central/apifilesm.py`**
 
 **🍝 The project structure is described as follows:**
-- Central: apis connecting to the frontend;
-- Controllers: integrating components to form functions;
-- Components & Upgrades: LLM units;
-- DAO: crud functions connecting to the database;
-- fixedSentences.py: pre-defined sentences;
-- topicTreesm: a tree structure for interaction flow control.
+- `Central`: apis connecting to the frontend;
+- `Controllers`: integrating components to form functions;
+- `Components` & `Upgrades`: LLM units;
+- `DAO`: crud functions connecting to the database;
+- `fixedSentences.py`: pre-defined sentences;
+- `topicTreesm.py`: a tree structure for interaction flow control.
 
 **🥠 What you need to configure:**
 - OpenAI api-key;
-- Firebase credentials under /DAO;
-- Database urls in /DAO/dbops.
+- Firebase credentials under `/DAO`;
+- Database urls in `/DAO/dbops.py`.
