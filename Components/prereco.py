@@ -67,7 +67,7 @@ def prereco_interface(uid):
             location=loc, dietaryrestriction=con, calorie=cal, dietarypreference=pre, specificpreferedfood=preferfood,
             healthconcern=health, diningenvironment=place, diethistory=his)
 
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key="your_api_key")
 
     response = client.chat.completions.create(
         model="gpt-4-1106-preview",

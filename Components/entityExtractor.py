@@ -9,7 +9,7 @@ def extractor_interface(passage):
     [passage]: 
     ''' 
   
-    client = OpenAI(api_key = "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")
+    client = OpenAI(api_key = "your_api_key")
     interface = '\nYour output: '
     prompt = para_prompt + passage + interface
     

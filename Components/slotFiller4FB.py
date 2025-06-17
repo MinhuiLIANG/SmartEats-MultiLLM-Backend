@@ -5,7 +5,7 @@ from DAO import dbops
 
 uid = 'asdkhasd'
 def fb_interface():
-    client = OpenAI(api_key = "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")
+    client = OpenAI(api_key = "your_api_key")
     
     slot_prompt = '''
     topic 1: <emotion> -> values 1: [<positive>, <neutral>, <negative>]

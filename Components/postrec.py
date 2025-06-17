@@ -92,7 +92,7 @@ def postrec_interface(round, uid):
         So my output's format should be like: '<first food> [cat] <reason> [sep] <second food> [cat] <reason>'. I will remember to use [sep]!
         '''.format(emotion=emo,eatinghabit=eh,limitation=limit,eatinggoal=goal,healthconcern=health,preferedfood=prefood,feedback=fb,food1=f1,food2=f2,food3=f3,food4=f4,food5=f5,food6=f6,food7=f7,food8=f8,food9=f9,food10=f10)
 
-        client = OpenAI(api_key="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")
+        client = OpenAI(api_key="your_api_key")
         interface_answer = '\nMy output: '
         prompt = recPrompt + interface_answer
 

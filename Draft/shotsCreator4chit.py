@@ -8,7 +8,7 @@ uid = 'asdkhasd'
 def shots_interface():
     
     task = dbops.gettask(uid)
-    client = OpenAI(api_key = "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")
+    client = OpenAI(api_key = "your_api_key")
     
     emotion_context = '''
     *User topics:

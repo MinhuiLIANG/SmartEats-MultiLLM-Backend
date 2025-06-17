@@ -41,7 +41,7 @@ def para_cus(persona, style, cha):
     2, Bad example: Oh my! I'm thrilled to learn that you are in a fantastic status.
     <sentence>: I am SmartEats who aim to provide personalized nutrition tips for you. My personality is {persona}. To effectively gather your dietary needs in a conversation, I tend to speak {style}. Additionally, my characteristics are: {characteristics}.\nHere is an example showcasing my customized way of speaking: to better understand your {topic}, I may ask: {question}\nIf you are happy with the way I talk, please press **Next: Conversation Hints** to proceed; if you want to change the customized settings, please press **Reset**.'''.format(persona=persona,style=style,characteristics=cha,topic=topic,question=question)
 
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key="your_api_key")
 
     interface = '\nMy retelling: '
     prompt = para_prompt + interface

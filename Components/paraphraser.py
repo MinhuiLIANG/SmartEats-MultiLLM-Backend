@@ -28,7 +28,7 @@ def para_interface(sentence, uid):
     2, Bad example: Oh my! I'm thrilled to learn that you are in a fantastic status.
     <sentence>: '''.format(persona=persona,style=style,characteristics=cha)
 
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key="your_api_key")
 
     interface = '\nMy retelling: '
     prompt = para_prompt + sentence + interface

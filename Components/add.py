@@ -17,7 +17,7 @@ def add_interface(uid):
     *Important Note*: I never ask any questions to the user!
     '''.format(restriction=restriction)
 
-    client = OpenAI(api_key = "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")
+    client = OpenAI(api_key = "your_api_key")
 
     prompt = addPrompt
     

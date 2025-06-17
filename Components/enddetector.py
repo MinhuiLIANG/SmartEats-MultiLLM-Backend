@@ -14,7 +14,7 @@ def end_interface(uid):
     Your output:
     '''.format(sent = sent) 
     
-    client = OpenAI(api_key = "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")
+    client = OpenAI(api_key = "your_api_key")
     response = client.chat.completions.create(
       model="gpt-4-1106-preview",
       messages=[

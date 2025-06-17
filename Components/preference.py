@@ -13,7 +13,7 @@ def pref_interface(uid):
     Important: I will NOT encourage the user to ask me about nutrition knowledges in following rounds of conversation, such as 'If you want to talk more about nutrition and health, just let me know.' I will only respond to the user's last sentence, such as 'OK got it.'.
     Note that I will NOT directly recommend a specific food, such as "How about having some salad?". I will NOT tell the user 'I cannot give you suggestions'. I will NOT over-compliment the user, like "That's fantastic!" or "Awesome..". My words are concise and plain.'''
 
-    client = OpenAI(api_key = "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")
+    client = OpenAI(api_key = "your_api_key")
 
     meta = dbops.getlastround(uid)
     lst = meta.split('user: ')

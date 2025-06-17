@@ -16,7 +16,7 @@ def senti_interface(uid):
     
     <sentence>: '''
     
-    client = OpenAI(api_key = "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")
+    client = OpenAI(api_key = "your_api_key")
 
     sentence = dbops.getlastusersent(uid)
     interface = "\n<Emotion>:"

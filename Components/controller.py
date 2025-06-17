@@ -21,7 +21,7 @@ def controller(order, uid):
     {conv}
     '''.format(topic=currtopic, conv=conv)
     
-    client = OpenAI(api_key = "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")
+    client = OpenAI(api_key = "your_api_key")
 
     interface = "\Your selection:"
     prompt = controllerprompt + interface

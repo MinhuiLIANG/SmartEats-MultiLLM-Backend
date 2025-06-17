@@ -62,7 +62,7 @@ def rec_interface(round):
     
     '''.format(cal=cal,loc=loc,emo=emo,hun=hun,limit=limit,con=con,goal=goal,prefer=prefer,fb=fb)  
     
-    openai.api_key = "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"
+    openai.api_key = "your_api_key"
     interface_answer = '\nMy recmendation: '
     prompt = chitchatPrompt + interface_answer
     response = openai.Completion.create(

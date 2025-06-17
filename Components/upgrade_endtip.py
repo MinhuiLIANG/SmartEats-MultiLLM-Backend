@@ -62,7 +62,7 @@ def getips(uid):
     '''.format(
         location=loc, foodrestriction=confood, calorie=cal, dietarypreference=pre, specificpreferedfood=preferfood, healthconcern=health, diningenvironment=place, diethistory=his, eatinghabit=eh, emotion=emo, timelimitation=limit, eatinggoal=goal, LTMinfo=LTMinfo, budget=budget, culture=culture, social=social, exercise=exercise)
 
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key="your_api_key")
 
     response = client.chat.completions.create(
         model="gpt-4-1106-preview",

@@ -11,7 +11,7 @@ import json
 # uid = 'asdkhasd'
 
 def preslot_interface(uid):
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key="your_api_key")
 
     meta = dbops.getlastround(uid)
     lst = meta.split('user: ')

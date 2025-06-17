@@ -129,7 +129,7 @@ def form_interface(uid):
     else:
         prompt = chitchat_prompt
 
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key="your_api_key")
 
     meta = dbops.getlastround(uid)
     lst = meta.split('user: ')
